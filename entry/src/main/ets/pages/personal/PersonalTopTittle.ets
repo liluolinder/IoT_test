@@ -11,7 +11,7 @@ export  struct PersonalTopTittle {
         .textAlign(TextAlign.Start)
         .font({size:28,weight:FontWeight.Bolder})
 
-    }.width('95%')
+    }.width('90%')
     .borderRadius('5%')
     .margin({bottom:10})
 

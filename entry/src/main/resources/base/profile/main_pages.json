@@ -5,6 +5,7 @@
     "pages/home/HomeTopButton",
     "pages/personal/Personal",
     "pages/personal/PersonalTopTittle",
-    "pages/personal/PersonalInfo"
+    "pages/personal/PersonalInfo",
+    "pages/personal/PersonalButtonList"
   ]
 }
