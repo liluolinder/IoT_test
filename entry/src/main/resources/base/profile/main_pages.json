@@ -1,0 +1,10 @@
+{
+  "src": [
+    "pages/Index",
+    "pages/home/Home",
+    "pages/home/HomeTopButton",
+    "pages/personal/Personal",
+    "pages/personal/PersonalTopTittle",
+    "pages/personal/PersonalInfo"
+  ]
+}
