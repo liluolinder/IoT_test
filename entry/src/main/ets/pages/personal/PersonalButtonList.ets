@@ -15,11 +15,15 @@ export  struct PersonalButtonList {
     new PersonalBodyButtonClass("2","帮助","")];
 
   build() {
+
     Column() {
+
       Column() {
 
         ForEach(this.PersonalButtonLists1, (item: PersonalBodyButtonClass, id: number) => {
+
           Button() {
+
             Row() {
 
               Text(item.buttonInfo)
