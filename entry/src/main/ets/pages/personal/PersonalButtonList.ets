@@ -1,7 +1,5 @@
 import {PersonalBodyButtonClass} from '../../classes/PersonalBodyButtonClass'
-import App from '@system.app';
 
-@Entry
 @Component
 export  struct PersonalButtonList {
 

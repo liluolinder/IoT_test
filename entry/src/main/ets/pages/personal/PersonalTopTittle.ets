@@ -1,4 +1,4 @@
-@Entry
+
 @Component
 export  struct PersonalTopTittle {
   @State message: string = 'Hello World';

@@ -1,7 +1,7 @@
 import {PersonalTopTittle} from './PersonalTopTittle'
 import {PersonalInfo} from './PersonalInfo'
 import {PersonalButtonList} from './PersonalButtonList'
-@Entry
+
 @Component
 export struct  Personal {
 

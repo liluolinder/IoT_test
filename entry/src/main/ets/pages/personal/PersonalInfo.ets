@@ -1,7 +1,6 @@
 import { BusinessError } from '@ohos.base';
 import { photoAccessHelper } from '@kit.MediaLibraryKit';
 
-@Entry
 @Component
 export  struct PersonalInfo {
 

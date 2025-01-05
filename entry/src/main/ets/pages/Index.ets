@@ -37,7 +37,7 @@ struct Index {
     }
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])//沉浸式拓展安全区
     .vertical(false) //水平索引
-    .scrollable(true) //允许左右滑动切换
+    .scrollable(false) //允许左右滑动切换
     .backgroundColor('#F1F3F5') //背景色 (灰色，hw经典色)
     .divider({
       strokeWidth: 0.5,

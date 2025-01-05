@@ -1,7 +1,7 @@
 import {HomeTopButton} from './HomeTopButton'
 import {HomeTitleSelect} from  './HomeTitleSelect'
 
-@Entry
+
 @Component
 export struct Home {
 
