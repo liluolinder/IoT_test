@@ -4,7 +4,6 @@ export class PersonalBodyButtonClass
   buttonInfo:string='';
   buttonToPage:string='';
 
-
   constructor(id:string,buttonInfo:string,buttonTopage:string)
   {
     this.id=id;

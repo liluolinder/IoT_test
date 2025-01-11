@@ -3,6 +3,25 @@ import { promptAction } from "@kit.ArkUI";
 @Component
 export struct HomeTopButton {
 
+  @State isShowAddDevice:boolean=false
+  @State isShowAddGround:boolean=false
+
+  @Builder
+  HomeAddDeviceBuildSheet() {
+    Column()
+    {
+      Text('没做')
+    }
+  }
+
+  @Builder
+  HomeAddGroundBuildSheet() {
+    Column()
+    {
+      Text('没做')
+    }
+  }
+
   @Builder
   TopAddMenu(){
 
@@ -10,16 +29,16 @@ export struct HomeTopButton {
 
       MenuItem({content: "添加设备" })
         .onClick(()=>{
-          promptAction.showToast({
-            message: '没做',
-          });
-        })
+          this.isShowAddDevice=true;
+          })
+
+
+
       MenuItem({content: "创建场景" })
         .onClick(()=>{
-          promptAction.showToast({
-            message: '没做',
-          });
+          this.isShowAddGround=true;
         })
+
       MenuItem({content:   "扫一扫" })
         .onClick(()=>{
           promptAction.showToast({
@@ -44,6 +63,11 @@ export struct HomeTopButton {
       .backgroundColor(Color.White)
       .height('35')
       .bindMenu(this.TopAddMenu())
+      .bindSheet($$this.isShowAddDevice,this.HomeAddDeviceBuildSheet(),
+        {
+          title:{title:'添加设备',subtitle:'Add a new device'},
+        })
+
 
     }
     .justifyContent(FlexAlign.End)

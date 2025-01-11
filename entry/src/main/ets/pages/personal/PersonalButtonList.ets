@@ -10,9 +10,8 @@ export  struct PersonalButtonList {
     new PersonalBodyButtonClass("1","关于我们","")];
 
   @State PersonalButtonLists2:Array<PersonalBodyButtonClass>  = [
-    new PersonalBodyButtonClass("0","隐私管理",""),
-    new PersonalBodyButtonClass("1","反馈",""),
-    new PersonalBodyButtonClass("2","帮助","")];
+    new PersonalBodyButtonClass("0","反馈",""),
+    new PersonalBodyButtonClass("1","帮助","")];
 
   @Builder
   bindSheetLoginInBuilder()
@@ -51,8 +50,6 @@ export  struct PersonalButtonList {
           .margin('5')
           .borderRadius('5%')
 
-
-
           if (id < this.PersonalButtonLists1.length - 1) {
             Divider().width('80%').color(Color.Black)
           }
@@ -86,6 +83,7 @@ export  struct PersonalButtonList {
           .backgroundColor(Color.White)
           .margin('5')
           .borderRadius('5%')
+          .onClick(()=>this.isShow=true)
 
           if (id < this.PersonalButtonLists2.length - 1) {
             Divider().width('80%').color(Color.Black)
@@ -97,6 +95,37 @@ export  struct PersonalButtonList {
       }.width('90%')
       .borderRadius('5%')
       .backgroundColor(Color.White)
+
+      Divider().strokeWidth(10).color('#F1F3F5')
+
+      Column() {
+
+          Button() {
+
+            Row() {
+
+              Text('123')
+                .fontColor(Color.Black)
+                .width('90%')
+
+              Blank()
+
+              SymbolGlyph($r('sys.symbol.chevron_right')).fontSize(30)
+            }
+
+          }
+          .width('100%')
+          .height('50')
+          .backgroundColor(Color.White)
+          .margin('5')
+          .borderRadius('5%')
+
+
+
+      }.width('90%')
+      .borderRadius('5%')
+      .backgroundColor(Color.White)
+
     }
   }
 
