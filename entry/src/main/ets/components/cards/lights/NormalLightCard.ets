@@ -1,6 +1,6 @@
 
 @Component
-export  struct NormalLightCard{
+export struct NormalLightCard{
 
   @State lightName:string=''
   @State lightPic:string=''

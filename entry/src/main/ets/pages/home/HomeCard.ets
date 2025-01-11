@@ -4,7 +4,7 @@ export struct HomeCard{
 
   build() {
 
-    
+
 
   }
 

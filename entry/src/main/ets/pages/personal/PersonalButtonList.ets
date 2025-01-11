@@ -3,6 +3,8 @@ import {PersonalBodyButtonClass} from '../../classes/PersonalBodyButtonClass'
 @Component
 export  struct PersonalButtonList {
 
+  @State isShow:boolean=false;
+
   @State PersonalButtonLists1:Array<PersonalBodyButtonClass>  = [
     new PersonalBodyButtonClass("0","设置",""),
     new PersonalBodyButtonClass("1","关于我们","")];
@@ -11,6 +13,15 @@ export  struct PersonalButtonList {
     new PersonalBodyButtonClass("0","隐私管理",""),
     new PersonalBodyButtonClass("1","反馈",""),
     new PersonalBodyButtonClass("2","帮助","")];
+
+  @Builder
+  bindSheetLoginInBuilder()
+  {
+    Column()
+    {
+      Text('没做完')
+    }
+  }
 
   build() {
 
@@ -30,7 +41,7 @@ export  struct PersonalButtonList {
 
               Blank()
 
-              Image($r('app.media.ic_public_arrow_right')).height('80%')
+              SymbolGlyph($r('sys.symbol.chevron_right')).fontSize(30)
             }
 
           }
@@ -39,6 +50,8 @@ export  struct PersonalButtonList {
           .backgroundColor(Color.White)
           .margin('5')
           .borderRadius('5%')
+
+
 
           if (id < this.PersonalButtonLists1.length - 1) {
             Divider().width('80%').color(Color.Black)
@@ -63,7 +76,8 @@ export  struct PersonalButtonList {
 
               Blank()
 
-              Image($r('app.media.ic_public_arrow_right')).height('80%')
+              SymbolGlyph($r('sys.symbol.chevron_right')).fontSize(30)
+
             }
 
           }
