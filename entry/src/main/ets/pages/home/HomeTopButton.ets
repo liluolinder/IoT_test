@@ -5,13 +5,35 @@ export struct HomeTopButton {
 
   @State isShowAddDevice:boolean=false
   @State isShowAddGround:boolean=false
+  @State isFirstStepNext:boolean=false
+
+  @State HomeTitleSelectList:Array<SelectOption>=[{value:'我的家'},{value:'???'}];
+  @State index:number=1;
 
   @Builder
   HomeAddDeviceBuildSheet() {
-    Column()
-    {
-      Text('没做')
-    }
+    Stepper(){
+      StepperItem(){
+
+        Column(){
+          Text('选择设备类型')
+            .onClick(()=>this.isFirstStepNext=true)
+        }.height('100%')
+
+      }.status(this.isFirstStepNext?ItemState.Normal:ItemState.Waiting)
+
+      StepperItem(){
+        Column(){
+          Text('搜寻设备中')
+          LoadingProgress().width('70%')
+        }.height('100%')
+        .width('90%')
+
+      }
+      StepperItem(){
+        Text('3')
+      }
+    }.margin({bottom:10})
   }
 
   @Builder
@@ -53,9 +75,26 @@ export struct HomeTopButton {
   build() {
 
     Row(){
+      Select(this.HomeTitleSelectList)
+        .selected(0)
+        .value(this.HomeTitleSelectList==null?'暂未创建场景':this.HomeTitleSelectList[0].value)
+        .font({ size: 22, weight: FontWeight.Bolder })
+        .fontColor('#182431')
+        .selectedOptionFont({ size: 16, weight: 400 })
+        .optionFont({ size: 16, weight: 400 })
+        .menuAlign(MenuAlignType.START, {dx:0, dy:0})
+        .optionWidth(200)
+        .optionHeight(300)
+        .width('60%')
+
+      Blank()
+        .bindSheet($$this.isShowAddGround,this.HomeAddGroundBuildSheet(),
+        {
+          title:{title:'添加场景',subtitle:'Add a new ground'},
+        })
+
 
       Button(){
-
         Image($r('app.media.ic_public_add_filled'))
           .height('35')
 
@@ -70,7 +109,6 @@ export struct HomeTopButton {
 
 
     }
-    .justifyContent(FlexAlign.End)
     .width('90%')
 
   }
