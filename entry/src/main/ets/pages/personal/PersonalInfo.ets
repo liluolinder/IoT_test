@@ -36,7 +36,7 @@ export  struct PersonalInfo {
       this.bindSheetLoginInBuilder(),
       {
         height:300,
-        title: { title: "快捷登录", subtitle: "Click to log in" },
+        title: { title: "快捷登录", subtitle: "Quick to log in" },
       })
 
   }
