@@ -5,6 +5,7 @@ export struct HomeTopButton {
 
   @State isShowAddDevice:boolean=false
   @State isShowAddGround:boolean=false
+
   @State isFirstStepNext:boolean=false
 
   @State HomeTitleSelectList:Array<SelectOption>=[{value:'我的家'},{value:'???'}];
@@ -25,7 +26,7 @@ export struct HomeTopButton {
       StepperItem(){
         Column(){
           Text('搜寻设备中')
-          LoadingProgress().width('70%')
+          LoadingProgress().width('50')
         }.height('100%')
         .width('90%')
 
@@ -105,6 +106,7 @@ export struct HomeTopButton {
       .bindSheet($$this.isShowAddDevice,this.HomeAddDeviceBuildSheet(),
         {
           title:{title:'添加设备',subtitle:'Add a new device'},
+          onDisappear:()=>{this.isFirstStepNext=false}
         })
 
 

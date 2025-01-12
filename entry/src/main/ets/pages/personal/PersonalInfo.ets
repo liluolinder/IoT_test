@@ -8,7 +8,7 @@ export  struct PersonalInfo {
   @State userName:string='暂未登录';
 
   @Builder
-  bindSheetLoginInBuilder()
+  PersonalLogInBuildSheet()
   {
     Column()
     {
@@ -33,7 +33,7 @@ export  struct PersonalInfo {
     .borderRadius('5%')
     .onClick(()=>this.isShow=true)
     .bindSheet($$this.isShow,             //$$引用表示，isShow变量值与组件bindSheetLoginInBuilder状态一致
-      this.bindSheetLoginInBuilder(),
+      this.PersonalLogInBuildSheet(),
       {
         height:300,
         title: { title: "快捷登录", subtitle: "Quick to log in" },
