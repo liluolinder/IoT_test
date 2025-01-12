@@ -18,7 +18,35 @@ export struct HomeTopButton {
 
         Column(){
           Text('选择设备类型')
-            .onClick(()=>this.isFirstStepNext=true)
+
+          Grid(){
+            ForEach([0,1,2,3,4,5,6,7,8,9],(id:number)=>{
+              GridItem(){
+                Column(){
+                  Image('')
+                  Row(){
+                    Text(id.toString())
+                    Blank()
+                    Radio({value:id.toString(),group:'devicePicker'})
+                      .onChange((isChecked)=>{this.isFirstStepNext=isChecked})
+                  }
+
+
+
+                }.width('150')
+                .height("150")
+                .backgroundColor(Color.White)
+                .borderRadius('5%')
+              }
+            })
+          }.columnsTemplate('repeat(auto-stretch, 150)')
+          .rowsGap(10)
+          .width('90%')
+          .height('100%')
+          .margin({top:5})
+          .scrollBar(BarState.Off)
+          .multiSelectable(true)
+
         }.height('100%')
 
       }.status(this.isFirstStepNext?ItemState.Normal:ItemState.Waiting)
@@ -35,6 +63,7 @@ export struct HomeTopButton {
         Text('3')
       }
     }.margin({bottom:10})
+
   }
 
   @Builder
@@ -62,7 +91,7 @@ export struct HomeTopButton {
           this.isShowAddGround=true;
         })
 
-      MenuItem({content:   "扫一扫" })
+      MenuItem({content: "扫一扫" })
         .onClick(()=>{
           promptAction.showToast({
             message: '没做',

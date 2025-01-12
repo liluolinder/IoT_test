@@ -11,6 +11,8 @@ export struct Home {
       HomeTopButton()
 
       HomeCard().margin({top:20})
+
+
     }
     .height('100%')
 
