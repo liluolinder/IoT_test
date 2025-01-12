@@ -1,4 +1,4 @@
-class DeviceClass
+export class DeviceClass
 {
   deviceName:string='';
   devicePic:string='';
