@@ -89,7 +89,9 @@ export  struct PersonalButtonList {
           .borderRadius('5%')
           .onClick(()=>{if(id==2){this.isShowPrivacyManage=true}})
           .bindSheet(item.isNeedBuildSheet && this.isShowPrivacyManage,this.PersonalPrivacyManageBuildSheet(),{
-            onDisappear:()=>{this.isShowPrivacyManage=false}
+            onDisappear:()=>{this.isShowPrivacyManage=false},
+            title:{title:'隐私管理',subtitle:'Privacy Manage'},
+            height:300
           })
 
           if (id < this.PersonalButtonLists2.length - 1) {
