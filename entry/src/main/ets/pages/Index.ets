@@ -13,7 +13,7 @@ struct Index {
       vibrator.startVibration({
         type: 'preset',           //默认
         effectId: 'haptic.effect.hard',   //https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/js-apis-vibrator-V13#effectid
-        count: 2,          //震动次数
+        count: 1,          //震动次数
       }, {
         usage: 'touch'          //使用场景，系统决定优先级
       })
