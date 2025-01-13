@@ -25,6 +25,8 @@ export struct HomeCard{
     .margin({top:5})
     .scrollBar(BarState.Off)
     .multiSelectable(true)
+    .borderRadius('10')
+    .edgeEffect(EdgeEffect.Spring,{ alwaysEnabled: true })
 
 
   }

@@ -1,6 +1,6 @@
 import { Home } from './home/Home'
 import { Personal } from './personal/Personal'
-import {ChangeTabVibrator} from '../tools/ChangeTabVibrator'
+import {DefaultHardVibration} from '../tools/Vibrator'
 
 @Entry
 @Component
@@ -37,7 +37,7 @@ struct Index {
       }.tabBar('我的').expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])//沉浸式拓展安全区
 
     }
-    .onChange(()=>{ChangeTabVibrator()})
+    .onChange(()=>{DefaultHardVibration()})
     .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])//沉浸式拓展安全区
     .vertical(false) //水平索引
     .scrollable(false) //允许左右滑动切换

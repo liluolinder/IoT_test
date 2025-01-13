@@ -12,7 +12,7 @@ export  struct PersonalTopTittle {
         .font({size:28,weight:FontWeight.Bolder})
 
     }.width('90%')
-    .borderRadius('5%')
+    .borderRadius('10')
     .margin({bottom:10})
 
   }

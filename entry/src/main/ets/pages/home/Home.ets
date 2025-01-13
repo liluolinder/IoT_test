@@ -9,10 +9,11 @@ export struct Home {
     Column() {
 
       HomeTopButton()
-      HomeCard()
 
-    }
-    .height('100%')
+      HomeCard().margin({top:10}).height('90%')
+
+    }.height('100%')
+
 
 
   }

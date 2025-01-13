@@ -1,5 +1,5 @@
 import { vibrator } from '@kit.SensorServiceKit';
-export function ChangeTabVibrator()             //切换Tab页面时候的震动
+export function DefaultHardVibration()             //切换Tab页面时候的震动
 {
   try {
     vibrator.startVibration({

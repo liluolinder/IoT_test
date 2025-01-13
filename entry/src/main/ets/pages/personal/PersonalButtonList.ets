@@ -52,7 +52,7 @@ export  struct PersonalButtonList {
           .height('50')
           .backgroundColor(Color.White)
           .margin('5')
-          .borderRadius('5%')
+          .borderRadius('10')
 
           if (id < this.PersonalButtonLists1.length - 1) {
             Divider().width('80%').color(Color.Black)
@@ -61,7 +61,7 @@ export  struct PersonalButtonList {
         }, (item: PersonalBodyButtonClass) => item.id)
 
       }.width('90%')
-      .borderRadius('5%')
+      .borderRadius('10')
       .backgroundColor(Color.White)
 
       Divider().strokeWidth(10).color('#F1F3F5')
@@ -86,7 +86,7 @@ export  struct PersonalButtonList {
           .height('50')
           .backgroundColor(Color.White)
           .margin('5')
-          .borderRadius('5%')
+          .borderRadius('10')
           .onClick(()=>{if(id==2){this.isShowPrivacyManage=true}})
           .bindSheet(item.isNeedBuildSheet && this.isShowPrivacyManage,this.PersonalPrivacyManageBuildSheet(),{
             onDisappear:()=>{this.isShowPrivacyManage=false},
@@ -102,7 +102,7 @@ export  struct PersonalButtonList {
 
 
       }.width('90%')
-      .borderRadius('5%')
+      .borderRadius('10')
       .backgroundColor(Color.White)
 
 
