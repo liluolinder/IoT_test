@@ -47,7 +47,7 @@ export struct HomeAddNewDevice{
                 }.width('150')
                 .height("150")
                 .backgroundColor(Color.White)
-                .borderRadius('10')
+                .borderRadius('20')
                 .clickEffect({level:ClickEffectLevel.LIGHT,scale:0.7})
                 .onClick(()=>sendEventByKey(item.deviceName,10,''))
 
@@ -60,7 +60,7 @@ export struct HomeAddNewDevice{
           .margin({top:5})
           .scrollBar(BarState.Off)
           .multiSelectable(true)
-          .borderRadius('10')
+          .borderRadius('20')
           .edgeEffect(EdgeEffect.Spring,{ alwaysEnabled: true })
 
         }.height('90%')

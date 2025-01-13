@@ -19,7 +19,7 @@ export struct  Personal {
           PersonalButtonList().margin({top:20})
 
 
-        }.height('100%').borderRadius('5')
+        }.height('100%').borderRadius('20')
 
 
       }.scrollable(ScrollDirection.Vertical)        //垂直方向滑动
