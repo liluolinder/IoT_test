@@ -1,4 +1,6 @@
 import {DeviceClass} from '../../classes/DeviceClass'
+import { radio } from '@kit.TelephonyKit'
+
 @Component
 export struct HomeAddNewDevice{
 
@@ -39,8 +41,9 @@ export struct HomeAddNewDevice{
                         {
                           this.addNewDeviceName=item.deviceName;
                         }
-                      })
+                      }).id(item.deviceName)
                   }.width('90%')
+
 
 
 
@@ -49,6 +52,7 @@ export struct HomeAddNewDevice{
                 .backgroundColor(Color.White)
                 .borderRadius('5%')
                 .clickEffect({level:ClickEffectLevel.LIGHT,scale:0.7})
+                .onClick(()=>sendEventByKey(item.deviceName,10,''))
 
               }
             })

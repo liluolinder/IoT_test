@@ -1,5 +1,5 @@
 import {HomeTopButton} from './HomeTopButton'
-
+import {HomeCard} from './HomeCard'
 
 @Component
 export struct Home {
@@ -9,9 +9,7 @@ export struct Home {
     Column() {
 
       HomeTopButton()
-
-
-
+      HomeCard()
 
     }
     .height('100%')

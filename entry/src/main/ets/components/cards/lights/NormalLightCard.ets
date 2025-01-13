@@ -8,7 +8,6 @@ export struct NormalLightCard{
   build() {
 
     Column(){
-
       Image(this.lightPic)
       Blank()
       Text(this.lightName)
