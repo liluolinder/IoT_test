@@ -1,6 +1,6 @@
-import {DefaultHardVibration}from '../../../tools/Vibrator'
+import { DefaultHardVibration }from '../../../tools/Vibrator'
 import { promptAction } from "@kit.ArkUI";
-import { TipsDialog, SelectDialog, ConfirmDialog, AlertDialog, LoadingDialog, CustomContentDialog } from '@kit.ArkUI'
+import { CustomContentDialog } from '@kit.ArkUI'
 
 
 @Component
@@ -27,8 +27,6 @@ export struct NormalLightCard{
         .style({strokeWidth:16,scaleCount:5,enableScanEffect:true,enableSmoothEffect:true})
         .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
 
-      Image(this.test).width("100%")
-
     }.width('300')
     .height('250')
 
@@ -40,7 +38,7 @@ export struct NormalLightCard{
 
       Column(){
         Toggle({ type: ToggleType.Button, isOn: $$this.isOpen }) {
-          Text(this.isOpen?'已开启':'已关闭').fontColor('#182431').fontSize(12)
+          Text(this.isOpen?'已开启':'已关闭').fontColor(Color.Black).fontSize(12)
         }.width('95%')
         .height('40')
         .selectedColor('rgba(0,125,255,0.20)')
@@ -117,16 +115,27 @@ export struct NormalLightCard{
         }.type(ButtonType.Circle)
         .bindMenu(this.TopEditMenu())
 
+      }.width('90%')
+      .margin('10')
+      Column(){
+        Image(this.isOpen?this.normalLightOn:this.normalLightOff).width("20%")
+          .margin({bottom:15})
+        Text(this.normalLightName)
+          .margin({bottom:10})
+        Text('亮度:'+this.lightBrightness)
+          .fontSize('15')
+          .margin({bottom:10})
+          .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
+
+        Toggle({type:ToggleType.Switch,isOn:$$this.isOpen})
 
       }.width('90%')
-      .margin('40')
+      .height('180')
+      .alignItems(HorizontalAlign.Start)
 
-      Image(this.normalLightOff).width("15%")
-      Blank()
-      Toggle({type:ToggleType.Switch,isOn:$$this.isOpen})
-      Text(this.normalLightName)
 
-    }.backgroundColor(Color.White)
+    }
+    .backgroundColor(Color.White)
     .width(150)
     .height(200)
     .borderRadius('20')
