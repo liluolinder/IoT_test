@@ -17,7 +17,6 @@ export struct NormalLightCard{
   @State normalLightOn:Resource=$r('app.media.normalLightOn')
   @State test:Resource=$r('app.media.test1')
 
-
   @Builder
   NormalLightCardPreview(){
 
@@ -118,14 +117,23 @@ export struct NormalLightCard{
       }.width('90%')
       .margin('10')
       Column(){
+
         Image(this.isOpen?this.normalLightOn:this.normalLightOff).width("20%")
           .margin({bottom:15})
         Text(this.normalLightName)
           .margin({bottom:10})
-        Text('亮度:'+this.lightBrightness)
+        /*Text('亮度:'+this.lightBrightness)
           .fontSize('15')
           .margin({bottom:10})
+          .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)*/
+
+        DataPanel({values:[this.lightBrightness],max:5,type: DataPanelType.Line})
+          .width('100')
+          .height('8')
+          .closeEffect(true)
+          .margin({bottom:10})
           .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
+//https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/ts-basic-components-datapanel-V13#colorstop10
 
         Toggle({type:ToggleType.Switch,isOn:$$this.isOpen})
 
