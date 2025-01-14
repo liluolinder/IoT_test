@@ -5,7 +5,7 @@ import { radio } from '@kit.TelephonyKit'
 export struct HomeAddNewDevice{
 
   @State isFirstStepNext:boolean=false
-  @State addNewDeviceName:string=''
+  @State addNewDeviceType:DeviceClass=new DeviceClass('','')
 
   @State newDeviceArrary:Array<DeviceClass>=[
     new DeviceClass('灯',''),
@@ -39,7 +39,7 @@ export struct HomeAddNewDevice{
                         this.isFirstStepNext=isChecked;
                         if(isChecked)
                         {
-                          this.addNewDeviceName=item.deviceName;
+                          this.addNewDeviceType=item;
                         }
                       }).id(item.deviceName)
                   }.width('90%')
@@ -70,14 +70,20 @@ export struct HomeAddNewDevice{
       StepperItem(){
         Column(){
           Text('搜寻设备中')
-          Text(this.addNewDeviceName)
+          Text(this.addNewDeviceType.deviceName)
           LoadingProgress().width('50')
         }.height('100%')
         .width('90%')
 
       }
       StepperItem(){
-        Text('3')
+        Column(){
+
+          Image(this.addNewDeviceType.devicePic)
+
+
+        }.width('90%')
+
       }
     }.margin({bottom:10})
   }

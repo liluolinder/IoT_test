@@ -22,6 +22,21 @@
         "name": "release"
       }
     ],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\liluo\\.ohos\\config\\default_IoT_kcPGvtPUaxteVK0Wb-1DG8PfTKauJwnK6b8vhA5D0z0=.cer",
+          "storePassword": "0000001BFCC904A58AEE2CACA864C9B3835962C59E6781584A971B9B93251349D4E2244F2327977707DDFA",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B850698D3ED79A9A6095607B4E60CFD418D9BB5A167921CE51E64927CE06BE0A12F714215E77664",
+          "profile": "C:\\Users\\liluo\\.ohos\\config\\default_IoT_kcPGvtPUaxteVK0Wb-1DG8PfTKauJwnK6b8vhA5D0z0=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\liluo\\.ohos\\config\\default_IoT_kcPGvtPUaxteVK0Wb-1DG8PfTKauJwnK6b8vhA5D0z0=.p12"
+        }
+      }
+    ]
   },
   "modules": [
     {
