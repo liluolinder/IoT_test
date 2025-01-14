@@ -75,7 +75,7 @@ export struct HomeTopButton {
 
 
       Button(){
-        Image($r('app.media.ic_public_add_filled'))
+        Image($r('app.media.addNew'))
           .height('35')
 
       }.type(ButtonType.Circle)
