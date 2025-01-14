@@ -18,7 +18,6 @@ export struct  Personal {
           PersonalInfo()
           PersonalButtonList().margin({top:20})
 
-
         }.height('100%').borderRadius('20')
 
 

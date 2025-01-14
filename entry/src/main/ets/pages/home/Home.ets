@@ -12,6 +12,7 @@ export struct Home {
 
       HomeCard().margin({top:10}).height('90%')
 
+
     }.height('100%')
 
 
