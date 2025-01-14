@@ -30,7 +30,7 @@ export  struct PersonalInfo {
     }.backgroundColor(Color.White)
     .height(90)
     .width('90%')
-    .borderRadius('5%')
+    .borderRadius('20')
     .onClick(()=>this.isShow=true)
     .bindSheet($$this.isShow,             //$$引用表示，isShow变量值与组件bindSheetLoginInBuilder状态一致
       this.PersonalLogInBuildSheet(),

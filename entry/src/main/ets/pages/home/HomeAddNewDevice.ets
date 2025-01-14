@@ -1,4 +1,6 @@
 import {DeviceClass} from '../../classes/DeviceClass'
+import { radio } from '@kit.TelephonyKit'
+
 @Component
 export struct HomeAddNewDevice{
 
@@ -8,8 +10,8 @@ export struct HomeAddNewDevice{
   @State newDeviceArrary:Array<DeviceClass>=[
     new DeviceClass('灯',''),
     new DeviceClass('温度计',''),
-    new DeviceClass('?',''),
-    new DeviceClass('??',''),
+    new DeviceClass('电视',''),
+    new DeviceClass('空调',''),
     new DeviceClass('???',''),
     new DeviceClass('????',''),
     new DeviceClass('?????',''),
@@ -39,16 +41,15 @@ export struct HomeAddNewDevice{
                         {
                           this.addNewDeviceName=item.deviceName;
                         }
-                      })
+                      }).id(item.deviceName)
                   }.width('90%')
-
-
 
                 }.width('150')
                 .height("150")
                 .backgroundColor(Color.White)
-                .borderRadius('5%')
+                .borderRadius('20')
                 .clickEffect({level:ClickEffectLevel.LIGHT,scale:0.7})
+                .onClick(()=>sendEventByKey(item.deviceName,10,''))
 
               }
             })
@@ -59,6 +60,8 @@ export struct HomeAddNewDevice{
           .margin({top:5})
           .scrollBar(BarState.Off)
           .multiSelectable(true)
+          .borderRadius('20')
+          .edgeEffect(EdgeEffect.Spring,{ alwaysEnabled: true })
 
         }.height('90%')
 

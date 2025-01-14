@@ -1,5 +1,5 @@
 import {HomeTopButton} from './HomeTopButton'
-
+import {HomeCard} from './HomeCard'
 
 @Component
 export struct Home {
@@ -10,11 +10,10 @@ export struct Home {
 
       HomeTopButton()
 
+      HomeCard().margin({top:10}).height('90%')
 
+    }.height('100%')
 
-
-    }
-    .height('100%')
 
 
   }

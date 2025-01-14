@@ -1,4 +1,5 @@
 import {PersonalBodyButtonClass} from '../../classes/PersonalBodyButtonClass'
+import {PersonalPrivacyButton} from  './PersonalPrivacyButton'
 
 @Component
 export  struct PersonalButtonList {
@@ -14,13 +15,11 @@ export  struct PersonalButtonList {
     new PersonalBodyButtonClass("1","帮助","",false),
     new PersonalBodyButtonClass("2","隐私管理","",true)];
 
+
   @Builder
   PersonalPrivacyManageBuildSheet()
   {
-    Column()
-    {
-      Text('没做完')
-    }
+    PersonalPrivacyButton()
   }
 
 
@@ -52,7 +51,7 @@ export  struct PersonalButtonList {
           .height('50')
           .backgroundColor(Color.White)
           .margin('5')
-          .borderRadius('5%')
+          .borderRadius('20')
 
           if (id < this.PersonalButtonLists1.length - 1) {
             Divider().width('80%').color(Color.Black)
@@ -61,14 +60,17 @@ export  struct PersonalButtonList {
         }, (item: PersonalBodyButtonClass) => item.id)
 
       }.width('90%')
-      .borderRadius('5%')
+      .borderRadius('20')
       .backgroundColor(Color.White)
 
       Divider().strokeWidth(10).color('#F1F3F5')
 
       Column() {
+
         ForEach(this.PersonalButtonLists2, (item: PersonalBodyButtonClass, id: number) => {
+
           Button() {
+
             Row() {
 
               Text(item.buttonInfo)
@@ -86,13 +88,16 @@ export  struct PersonalButtonList {
           .height('50')
           .backgroundColor(Color.White)
           .margin('5')
-          .borderRadius('5%')
+          .borderRadius('20')
           .onClick(()=>{if(id==2){this.isShowPrivacyManage=true}})
+
           .bindSheet(item.isNeedBuildSheet && this.isShowPrivacyManage,this.PersonalPrivacyManageBuildSheet(),{
             onDisappear:()=>{this.isShowPrivacyManage=false},
             title:{title:'隐私管理',subtitle:'Privacy Manage'},
             height:300
+
           })
+
 
           if (id < this.PersonalButtonLists2.length - 1) {
             Divider().width('80%').color(Color.Black)
@@ -102,9 +107,8 @@ export  struct PersonalButtonList {
 
 
       }.width('90%')
-      .borderRadius('5%')
+      .borderRadius('20')
       .backgroundColor(Color.White)
-
 
     }
   }
