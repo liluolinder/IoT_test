@@ -27,10 +27,11 @@ export struct NormalLightCard{
         .style({strokeWidth:16,scaleCount:5,enableScanEffect:true,enableSmoothEffect:true})
         .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
 
+      Image(this.test).width("100%")
 
     }.width('300')
     .height('250')
-    Image(this.test).width("80%")
+
   }
 
   @Builder
