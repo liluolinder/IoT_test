@@ -8,13 +8,14 @@ export struct NormalLightCard{
 
   @State isOpen:boolean=false
 
-  @State lightStrength:number=1
+  @State lightBrightness:number=1
 
   @State normalLightName:string='卧室的灯'
   @State normalLightNewName:string=''
 
   @State normalLightOff:Resource=$r('app.media.normalLightOff')
   @State normalLightOn:Resource=$r('app.media.normalLightOn')
+  @State test:Resource=$r('app.media.test1')
 
 
   @Builder
@@ -22,14 +23,14 @@ export struct NormalLightCard{
 
     Column(){
 
-      Progress({value:this.lightStrength,total:5,type:ProgressType.Ring})
+      Progress({value:this.lightBrightness,total:5,type:ProgressType.Ring})
         .style({strokeWidth:16,scaleCount:5,enableScanEffect:true,enableSmoothEffect:true})
         .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
 
 
     }.width('300')
     .height('250')
-
+    Image(this.test).width("80%")
   }
 
   @Builder
@@ -47,9 +48,9 @@ export struct NormalLightCard{
 
         Text('灯光强度:').width('95%').textAlign(TextAlign.Start).visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
 
-        Slider({value:$$this.lightStrength,min:1,max:5,step:1,style:SliderStyle.InSet})
+        Slider({value:$$this.lightBrightness,min:1,max:5,step:1,style:SliderStyle.InSet})
           .showSteps(true)
-          .showTips(true,this.lightStrength.toString())
+          .showTips(true,this.lightBrightness.toString())
           .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
           .onChange(()=>DefaultHardVibration())
 
@@ -117,9 +118,9 @@ export struct NormalLightCard{
 
 
       }.width('90%')
-      .margin('10')
+      .margin('40')
 
-      Image(this.normalLightOff).width('90%')
+      Image(this.normalLightOff).width("15%")
       Blank()
       Toggle({type:ToggleType.Switch,isOn:$$this.isOpen})
       Text(this.normalLightName)
