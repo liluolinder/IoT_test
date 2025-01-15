@@ -1,4 +1,6 @@
 import {NormalLightCard} from '../../components/cards/lights/NormalLightCard'
+import {StandardThermometer} from '../../components/cards/thermometers/StandardThermometer'
+
 
 @Component
 export struct HomeCard{
@@ -6,12 +8,17 @@ export struct HomeCard{
 
     Grid(){
 
-      ForEach([0,1,2,3,4,5,6,7,8,9,10,11],()=>{
+      ForEach([0,1,2,3,4,5,6,7,8,9,10,11],(id:number)=>{
 
         GridItem()
         {
 
-          NormalLightCard()
+          if(id<=5){
+            NormalLightCard()
+          }else{
+            StandardThermometer()
+          }
+
 
         }
 

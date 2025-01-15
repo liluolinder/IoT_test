@@ -1,21 +1,17 @@
 import {DeviceClass} from '../../classes/DeviceClass'
-import { radio } from '@kit.TelephonyKit'
+import {HomeTitleSelectList} from  '../home/HomeTopButton'
 
 @Component
 export struct HomeAddNewDevice{
 
   @State isFirstStepNext:boolean=false
-  @State addNewDeviceType:DeviceClass=new DeviceClass('','')
+  @State addNewDeviceType:DeviceClass=new DeviceClass('',$r('app.media.addNew'))
 
   @State newDeviceArrary:Array<DeviceClass>=[
-    new DeviceClass('灯',''),
-    new DeviceClass('温度计',''),
-    new DeviceClass('电视',''),
-    new DeviceClass('空调',''),
-    new DeviceClass('???',''),
-    new DeviceClass('????',''),
-    new DeviceClass('?????',''),
-    new DeviceClass('??????',''),
+    new DeviceClass('灯',$r('app.media.normalLightOff')),
+    new DeviceClass('温度计',$r('app.media.thermometer')),
+    new DeviceClass('电视',$r('app.media.startIcon')),
+    new DeviceClass('空调',$r('app.media.startIcon')),
   ]
 
   build() {
@@ -29,7 +25,9 @@ export struct HomeAddNewDevice{
             ForEach(this.newDeviceArrary,(item:DeviceClass,id:number)=>{
               GridItem(){
                 Column(){
-                  Image('')
+                  Image(item.devicePic)
+                    .height('70')
+                    .margin({top:10})
                   Blank()
                   Row(){
                     Text(item.deviceName)
@@ -80,9 +78,20 @@ export struct HomeAddNewDevice{
         Column(){
 
           Image(this.addNewDeviceType.devicePic)
+            .height('100')
+            .margin({bottom:10})
+
+          TextInput({placeholder:'请输入新设备名称'})
+            .margin({bottom:10})
+            .width('100%')
+
+          Select(HomeTitleSelectList).width('100%')
+
+
 
 
         }.width('90%')
+        .height('100%')
 
       }
     }.margin({bottom:10})

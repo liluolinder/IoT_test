@@ -23,8 +23,6 @@ export  struct PersonalButtonList {
   }
 
 
-
-
   build() {
 
     Column() {

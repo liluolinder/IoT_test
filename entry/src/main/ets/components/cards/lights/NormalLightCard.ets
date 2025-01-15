@@ -2,7 +2,6 @@ import { DefaultHardVibration }from '../../../tools/Vibrator'
 import { promptAction } from "@kit.ArkUI";
 import { CustomContentDialog } from '@kit.ArkUI'
 
-
 @Component
 export struct NormalLightCard{
 
@@ -22,9 +21,25 @@ export struct NormalLightCard{
 
     Column(){
 
-      Progress({value:this.lightBrightness,total:5,type:ProgressType.Ring})
-        .style({strokeWidth:16,scaleCount:5,enableScanEffect:true,enableSmoothEffect:true})
-        .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
+      Text(this.normalLightName).margin({top:10,bottom:20}).fontSize('22')
+
+      Row(){
+        Image(this.isOpen?this.normalLightOn:this.normalLightOff)
+          .height('150')
+
+        Blank()
+
+        Stack(){
+          Progress({value:this.lightBrightness,total:5,type:ProgressType.Ring})
+            .style({strokeWidth:16,scaleCount:5,enableScanEffect:true,enableSmoothEffect:true})
+            .height('130')
+
+          Text('灯光亮度')
+        }.visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
+
+      }.width('90%')
+
+
 
     }.width('300')
     .height('250')
@@ -44,7 +59,7 @@ export struct NormalLightCard{
         .margin({top:10,bottom:20})
         .onChange(()=>DefaultHardVibration())
 
-        Text('灯光强度:').width('95%').textAlign(TextAlign.Start).visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
+        Text('灯光亮度:').width('95%').textAlign(TextAlign.Start).visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
 
         Slider({value:$$this.lightBrightness,min:1,max:5,step:1,style:SliderStyle.InSet})
           .showSteps(true)
@@ -68,7 +83,7 @@ export struct NormalLightCard{
     Menu(){
       MenuItem({content: "重命名" })
         .onClick(()=>{
-          this.dialogController.open()
+          this.renameDialogController.open()
         })
       MenuItem({content: "删除设备" })
         .onClick(()=>{
@@ -81,7 +96,7 @@ export struct NormalLightCard{
 
   }
 
-  dialogController: CustomDialogController = new CustomDialogController({
+  renameDialogController: CustomDialogController = new CustomDialogController({
     builder: CustomContentDialog({
       primaryTitle: '重命名',
       secondaryTitle: 'rename',
@@ -90,8 +105,13 @@ export struct NormalLightCard{
       },
       buttons: [{ value: '取消', buttonStyle: ButtonStyleMode.TEXTUAL,role: ButtonRole.ERROR },
                 { value: '确定', buttonStyle: ButtonStyleMode.TEXTUAL,action:()=>{
-                  this.normalLightName=this.normalLightNewName;
-                    this.normalLightNewName=''
+                  if(this.normalLightNewName!=''){
+                    this.normalLightName=this.normalLightNewName;
+                    this.normalLightNewName='';
+                  }else{
+
+                  }
+
                 }}],
     }),
   });
@@ -130,7 +150,6 @@ export struct NormalLightCard{
         DataPanel({values:[this.lightBrightness],max:5,type: DataPanelType.Line})
           .width('100')
           .height('8')
-          .closeEffect(true)
           .margin({bottom:10})
           .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
 //https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/ts-basic-components-datapanel-V13#colorstop10

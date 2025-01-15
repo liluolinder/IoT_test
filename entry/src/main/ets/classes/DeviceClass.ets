@@ -1,9 +1,9 @@
 export class DeviceClass
 {
   deviceName:string='';
-  devicePic:string='';
+  devicePic:Resource;
 
-  constructor(deviceName:string,devicePic:string){
+  constructor(deviceName:string,devicePic:Resource){
     this.deviceName=deviceName;
     this.devicePic=devicePic;
   }

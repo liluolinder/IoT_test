@@ -1,16 +1,17 @@
 import { promptAction } from "@kit.ArkUI";
 import { HomeAddNewDevice } from './HomeAddNewDevice'
 
+
+export let HomeTitleSelectList:Array<SelectOption>=[{value:'我的家'},{value:'???'}];
+
 @Component
 export struct HomeTopButton {
 
   @State isShowAddDevice:boolean=false
   @State isShowAddGround:boolean=false
 
-
-
-  @State HomeTitleSelectList:Array<SelectOption>=[{value:'我的家'},{value:'???'}];
   @State index:number=1;
+
 
   @Builder HomeAddDeviceBuildSheet() {
     HomeAddNewDevice()
@@ -55,9 +56,9 @@ export struct HomeTopButton {
   build() {
 
     Row(){
-      Select(this.HomeTitleSelectList)
+      Select(HomeTitleSelectList)
         .selected(0)
-        .value(this.HomeTitleSelectList==null?'暂未创建场景':this.HomeTitleSelectList[0].value)
+        .value(HomeTitleSelectList==null?'暂未创建场景':HomeTitleSelectList[0].value)
         .font({ size: 22, weight: FontWeight.Bolder })
         .fontColor('#182431')
         .selectedOptionFont({ size: 16, weight: 400 })
