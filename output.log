@@ -1,0 +1,15 @@
+2025-01-16 14:38:06 [INFO] [SemanticSearch] workspace path "D:/project/harmony/IoT"
+2025-01-16 14:38:06 [INFO] [SemanticSearch] model path C:\Users\liluo\AppData\Roaming\Huawei\DevEcoStudio5.0\plugins\BitFun-FireCoder\models/onnx
+2025-01-16 14:38:09 [INFO] [SemanticSearch] Init qdrant collection vnext0716773cc4828a419c31f009652984d834be15d7bf4db2b62ecdcc46bc13d36d took 137 ms.
+2025-01-16 14:38:09 [INFO] [SemanticSearch] All data of the workspace (identifier: vnext0716773cc4828a419c31f009652984d834be15d7bf4db2b62ecdcc46bc13d36d) will be clear
+2025-01-16 14:38:09 [INFO] [SemanticSearch] create collection vnext0716773cc4828a419c31f009652984d834be15d7bf4db2b62ecdcc46bc13d36d with error status: InvalidArgument, message: "Wrong input: Collection `vnext0716773cc4828a419c31f009652984d834be15d7bf4db2b62ecdcc46bc13d36d` already exists!", details: [], metadata: MetadataMap { headers: {"content-type": "application/grpc", "date": "Thu, 16 Jan 2025 06:38:09 GMT", "content-length": "0"} }
+2025-01-16 14:38:09 [INFO] [SemanticSearch] Diff documents took 53 ms
+2025-01-16 14:38:09 [INFO] [SemanticSearch] added documents: ["entry\\src\\main\\ets\\pages\\home\\HomeScanCode.cj"]
+2025-01-16 14:38:09 [INFO] [SemanticSearch] changed documents: []
+2025-01-16 14:38:09 [INFO] [SemanticSearch] removed documents: []
+2025-01-16 14:38:09 [INFO] [SemanticSearch] Project has 1 files, and sum 0 KB
+2025-01-16 14:38:09 [INFO] [SemanticSearch] Scan removed 0 documents
+2025-01-16 14:38:09 [INFO] [SemanticSearch] Scan added 1 documents
+2025-01-16 14:38:09 [INFO] [SemanticSearch] 0 files need to be deleted or updated
+2025-01-16 14:38:09 [INFO] [SemanticSearch] 0 entries to be added
+2025-01-16 14:38:09 [INFO] Delete expired collection (identifier: vnextac6802d12fc87f40542f2ee800bb9a229b2af93e4fa81fc7e57ab0f46caed2de.json)

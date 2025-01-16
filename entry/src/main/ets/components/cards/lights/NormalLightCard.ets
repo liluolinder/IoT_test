@@ -109,9 +109,8 @@ export struct NormalLightCard{
                     this.normalLightName=this.normalLightNewName;
                     this.normalLightNewName='';
                   }else{
-
+                    
                   }
-
                 }}],
     }),
   });
