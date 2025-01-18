@@ -10,9 +10,11 @@ export let HomeTitleSelectList:Array<SelectOption>=[{value:'我的家'},{value:'
 @Component
 export struct HomeTopButton {
 
-  @State isShowAddDevice:boolean=false
-  @State isShowAddGround:boolean=false
-  @State isScanCode:boolean=false
+  @StorageLink('isAddDeviceSheetShow') isShowAddDevice: boolean = false;
+
+  @State isShowAddGround:boolean=false;
+
+  @State isScanCode:boolean=false;
 
   @State index:number=1;
 
@@ -56,7 +58,13 @@ export struct HomeTopButton {
       MenuItem({content: "扫一扫" })
         .onClick(()=>{
           try {scanBarcode.startScanForResult(getContext(this), { scanTypes: [scanCore.ScanType.ALL], enableMultiMode: true, enableAlbum: true }).then((result: scanBarcode.ScanResult) => {
-            this.codeResult=JSON.stringify(result) as string;
+            let obj:object= JSON.parse(JSON.stringify(result));
+            this.codeResult=obj?.["originalValue"];
+            if(this.codeResult=='light'){
+              this.codeResult='灯';
+            }else{
+              this.codeResult='错误';
+            }
             this.isScanCode =true;
           }).catch((error: BusinessError) => {return});} catch (error) {}
         })
@@ -84,12 +92,15 @@ export struct HomeTopButton {
         .bindSheet($$this.isShowAddGround,this.HomeAddGroundBuildSheet(),
         {
           title:{title:'添加场景',subtitle:'Add a new ground'},
+          preferType:SheetType.BOTTOM,
+
         })
 
       Blank()
         .bindSheet($$this.isScanCode,this.HomeScanCodeBuildSheet(),
           {
             title:{title:'扫码结果',subtitle:'Result of code'},
+            preferType:SheetType.BOTTOM,
             height:300,
           })
 
@@ -105,6 +116,7 @@ export struct HomeTopButton {
       .bindSheet($$this.isShowAddDevice,this.HomeAddDeviceBuildSheet(),
         {
           title:{title:'添加设备',subtitle:'Add a new device'},
+          preferType:SheetType.BOTTOM,
         })
 
     }

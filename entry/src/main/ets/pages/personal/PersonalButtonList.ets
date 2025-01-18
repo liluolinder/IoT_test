@@ -92,6 +92,7 @@ export  struct PersonalButtonList {
           .bindSheet(item.isNeedBuildSheet && this.isShowPrivacyManage,this.PersonalPrivacyManageBuildSheet(),{
             onDisappear:()=>{this.isShowPrivacyManage=false},
             title:{title:'隐私管理',subtitle:'Privacy Manage'},
+            preferType:SheetType.BOTTOM,
             height:300
 
           })

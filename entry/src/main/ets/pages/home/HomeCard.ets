@@ -1,9 +1,13 @@
-import {NormalLightCard} from '../../components/cards/lights/NormalLightCard'
-import {StandardThermometer} from '../../components/cards/thermometers/StandardThermometer'
+import { NormalLightCard } from '../../components/cards/lights/NormalLightCard'
+import { StandardThermometer } from '../../components/cards/thermometers/StandardThermometer'
+import { storeRdb } from '../../entryability/EntryAbility'
 
 
 @Component
 export struct HomeCard{
+
+
+
   build() {
 
     Grid(){

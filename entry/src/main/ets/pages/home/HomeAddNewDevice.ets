@@ -1,11 +1,23 @@
 import {DeviceClass} from '../../classes/DeviceClass'
 import {HomeTitleSelectList} from  '../home/HomeTopButton'
+import { relationalStore } from '@kit.ArkData';
+import { BusinessError } from '@kit.BasicServicesKit';
+import { storeRdb } from '../../entryability/EntryAbility'
 
 @Component
 export struct HomeAddNewDevice{
 
+  @StorageLink('isAddDeviceSheetShow') isShowAddDevice: boolean = false;
+
   @State isFirstStepNext:boolean=false
+
   @State addNewDeviceType:DeviceClass=new DeviceClass('',$r('app.media.addNew'))
+
+  @State addNewDeviceName:string=''
+
+  @State addNewDeviceScene:string=''
+
+  @State isOpen:boolean=false
 
   @State newDeviceArrary:Array<DeviceClass>=[
     new DeviceClass('灯',$r('app.media.normalLightOff')),
@@ -81,12 +93,11 @@ export struct HomeAddNewDevice{
             .height('100')
             .margin({bottom:10})
 
-          TextInput({placeholder:'请输入新设备名称'})
+          TextInput({placeholder:'请输入新设备名称',text:$$this.addNewDeviceName})
             .margin({bottom:10})
             .width('100%')
 
           Select(HomeTitleSelectList).width('100%')
-
 
 
 
@@ -95,5 +106,29 @@ export struct HomeAddNewDevice{
 
       }
     }.margin({bottom:10})
+    .onFinish(()=>{
+
+        if(this.addNewDeviceType.deviceName=='灯')
+        {
+          const valueBucket1: relationalStore.ValuesBucket = {
+            'DEVICE_NAME' : this.addNewDeviceName,
+            'SCENE' :  this.addNewDeviceScene,
+            'IS_OPEN' : false,
+          };
+
+          if (storeRdb !== undefined) {
+            (storeRdb as relationalStore.RdbStore).insert('LIGHT_TABLE', valueBucket1, (err: BusinessError, rowId: number) => {
+              if (err) {
+                console.error(`Failed to insert data. Code:${err.code}, message:${err.message}`);
+                return;
+              }
+              console.info(`Succeeded in inserting data. rowId:${rowId}`);
+            })
+          }
+        }
+
+      console.info(`1111`);
+      this.isShowAddDevice=false;
+    })
   }
 }

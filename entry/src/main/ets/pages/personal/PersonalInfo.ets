@@ -37,6 +37,7 @@ export  struct PersonalInfo {
       {
         height:300,
         title: { title: "快捷登录", subtitle: "Quick to log in" },
+        preferType:SheetType.BOTTOM,
       })
     .clickEffect({level:ClickEffectLevel.LIGHT})
   }
