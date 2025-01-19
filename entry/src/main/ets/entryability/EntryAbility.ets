@@ -2,7 +2,7 @@ import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.Ab
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { relationalStore } from '@kit.ArkData'; // 导入模块
-import { BusinessError } from '@kit.BasicServicesKit';
+import { GetDeviceInfoFromRdb } from '../tools/GetDeviceInfoFromRdb'
 
 
 export let storeRdb:relationalStore.RdbStore
@@ -68,6 +68,8 @@ export default class EntryAbility extends UIAbility {
 
     })
 
+
+;
   }
 
   onWindowStageDestroy(): void {

@@ -1,8 +1,9 @@
-import {DeviceClass} from '../../classes/DeviceClass'
+import { DeviceClass, newDeviceClass} from '../../classes/DeviceClass'
 import {HomeTitleSelectList} from  '../home/HomeTopButton'
 import { relationalStore } from '@kit.ArkData';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { storeRdb } from '../../entryability/EntryAbility'
+import { GetDeviceInfoFromRdb, deviceArray} from  '../../tools/GetDeviceInfoFromRdb'
 
 @Component
 export struct HomeAddNewDevice{
@@ -11,7 +12,7 @@ export struct HomeAddNewDevice{
 
   @State isFirstStepNext:boolean=false
 
-  @State addNewDeviceType:DeviceClass=new DeviceClass('',$r('app.media.addNew'))
+  @State addNewDeviceType:newDeviceClass=new newDeviceClass('',$r('app.media.addNew'))
 
   @State addNewDeviceName:string=''
 
@@ -21,11 +22,13 @@ export struct HomeAddNewDevice{
 
   @State valueBucket: relationalStore.ValuesBucket | undefined= undefined
 
-  @State newDeviceArrary:Array<DeviceClass>=[
-    new DeviceClass('灯',$r('app.media.normalLightOff')),
-    new DeviceClass('温度计',$r('app.media.thermometer')),
-    new DeviceClass('电视',$r('app.media.startIcon')),
-    new DeviceClass('空调',$r('app.media.startIcon')),
+  @State newDevice:DeviceClass|undefined=undefined
+
+  @State newDeviceArrary:Array<newDeviceClass>=[
+    new newDeviceClass('灯',$r('app.media.normalLightOff')),
+    new newDeviceClass('温度计',$r('app.media.thermometer')),
+    new newDeviceClass('电视',$r('app.media.startIcon')),
+    new newDeviceClass('空调',$r('app.media.startIcon')),
   ]
 
   build() {
@@ -36,7 +39,7 @@ export struct HomeAddNewDevice{
           Text('选择设备类型')
 
           Grid(){
-            ForEach(this.newDeviceArrary,(item:DeviceClass,id:number)=>{
+            ForEach(this.newDeviceArrary,(item:newDeviceClass,id:number)=>{
               GridItem(){
                 Column(){
                   Image(item.devicePic)
@@ -140,8 +143,9 @@ export struct HomeAddNewDevice{
           console.info(`Succeeded in inserting data. rowId:${rowId}`);
         })
       }
-      console.info(`1111`);
-      this.isShowAddDevice=false;
+
+      this.isShowAddDevice=false;''
+
     })
   }
 }
