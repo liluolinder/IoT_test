@@ -19,6 +19,8 @@ export struct HomeAddNewDevice{
 
   @State isOpen:boolean=false
 
+  @State valueBucket: relationalStore.ValuesBucket | undefined= undefined
+
   @State newDeviceArrary:Array<DeviceClass>=[
     new DeviceClass('灯',$r('app.media.normalLightOff')),
     new DeviceClass('温度计',$r('app.media.thermometer')),
@@ -97,7 +99,9 @@ export struct HomeAddNewDevice{
             .margin({bottom:10})
             .width('100%')
 
-          Select(HomeTitleSelectList).width('100%')
+          Select(HomeTitleSelectList).width('100%').onSelect((index:number, text: string )=>{
+            this.addNewDeviceScene=text;
+          })
 
 
 
@@ -110,23 +114,32 @@ export struct HomeAddNewDevice{
 
         if(this.addNewDeviceType.deviceName=='灯')
         {
-          const valueBucket1: relationalStore.ValuesBucket = {
+         this.valueBucket = {
             'DEVICE_NAME' : this.addNewDeviceName,
             'SCENE' :  this.addNewDeviceScene,
-            'IS_OPEN' : false,
+            'IS_OPEN' : 0,        //0为关,1为关开,2为不启用
+            'DEVICE_TYPE':'light',
           };
 
-          if (storeRdb !== undefined) {
-            (storeRdb as relationalStore.RdbStore).insert('LIGHT_TABLE', valueBucket1, (err: BusinessError, rowId: number) => {
-              if (err) {
-                console.error(`Failed to insert data. Code:${err.code}, message:${err.message}`);
-                return;
-              }
-              console.info(`Succeeded in inserting data. rowId:${rowId}`);
-            })
-          }
+        }else if(this.addNewDeviceType.deviceName=='温度计')
+        {
+          this.valueBucket = {
+            'DEVICE_NAME' : this.addNewDeviceName,
+            'SCENE' :  this.addNewDeviceScene,
+            'IS_OPEN' :2 ,  //2表示不启用
+            'DEVICE_TYPE':'thermometer',
+          };
         }
 
+      if (storeRdb !== undefined) {
+        (storeRdb as relationalStore.RdbStore).insert('DEVICE_TABLE', this.valueBucket, (err: BusinessError, rowId: number) => {
+          if (err) {
+            console.error(`Failed to insert data. Code:${err.code}, message:${err.message}`);
+            return;
+          }
+          console.info(`Succeeded in inserting data. rowId:${rowId}`);
+        })
+      }
       console.info(`1111`);
       this.isShowAddDevice=false;
     })

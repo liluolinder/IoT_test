@@ -5,16 +5,22 @@ import { CustomContentDialog } from '@kit.ArkUI'
 @Component
 export struct NormalLightCard{
 
-  @State isOpen:boolean=false
-
-  @State lightBrightness:number=1
 
   @State normalLightName:string='卧室的灯'
   @State normalLightNewName:string=''
 
+  @State UUID:string=''
+
+  @State scene:string=''
+
+  @State isOpen:boolean=false
+
+  @State lightBrightness:number=1
+
+
+
   @State normalLightOff:Resource=$r('app.media.normalLightOff')
   @State normalLightOn:Resource=$r('app.media.normalLightOn')
-  @State test:Resource=$r('app.media.test1')
 
   @Builder
   NormalLightCardPreview(){

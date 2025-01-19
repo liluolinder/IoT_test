@@ -25,6 +25,7 @@ export default class EntryAbility extends UIAbility {
       if (err.code) {
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
         return;
+
       }
       hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
 
@@ -40,11 +41,9 @@ export default class EntryAbility extends UIAbility {
       isReadOnly: false // 可选参数，指定数据库是否以只读方式打开。该参数默认为false，表示数据库可读可写。该参数为true时，只允许从数据库读取数据，不允许对数据库进行写操作，否则会返回错误码801。
     };
 
-    const SQL_CREATE_LIGHT_TABLE =
-      'CREATE TABLE IF NOT EXISTS LIGHT_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, DEVICE_NAME TEXT NOT NULL , SCENE TEXT NOT NULL , IS_OPEN INTEGER NOT NULL )'; // 建表Sql语句, IDENTITY为bigint类型，sql中指定类型为UNLIMITED INT
+    const SQL_CREATE_DEVICE_TABLE =
+      'CREATE TABLE IF NOT EXISTS DEVICE_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, DEVICE_NAME TEXT NOT NULL , DEVICE_TYPE TEXT NOT NULL, SCENE TEXT NOT NULL , IS_OPEN INTEGER )'; // 建表Sql语句, IDENTITY为bigint类型，sql中指定类型为UNLIMITED INT
 
-    const SQL_CREATE_THERMOMETER_TABLE =
-      'CREATE TABLE IF NOT EXISTS THERMOMETER_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, DEVICE_NAME TEXT NOT NULL , SCENE TEXT NOT NULL  )'; // 建表Sql语句, IDENTITY为bigint类型，sql中指定类型为UNLIMITED INT
 
     const SQL_CREATE_SCENE_TABLE =
       'CREACREATE TABLE IF NOT EXISTS SCENE_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, SCENE TEXT NOT NULL  )'; // 建表Sql语句, IDENTITY为bigint类型，sql中指定类型为UNLIMITED INT
@@ -61,8 +60,7 @@ export default class EntryAbility extends UIAbility {
       storeRdb=store;
 
       if (store.version === 0) {
-        store.executeSql(SQL_CREATE_LIGHT_TABLE); // 创建数据表
-        store.executeSql(SQL_CREATE_THERMOMETER_TABLE); // 创建数据表
+        store.executeSql(SQL_CREATE_DEVICE_TABLE); // 创建数据表
         store.executeSql(SQL_CREATE_SCENE_TABLE); // 创建数据表
         // 设置数据库的版本，入参为大于0的整数
         store.version = 1;
