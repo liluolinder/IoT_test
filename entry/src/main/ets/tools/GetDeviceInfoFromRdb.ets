@@ -5,6 +5,8 @@ import { DeviceClass } from '../classes/DeviceClass'
 
 export let deviceArray:Array<DeviceClass>=[]
 
+let localID:number=-1
+
 export  function GetDeviceInfoFromRdb()
 {
 
@@ -29,7 +31,13 @@ export  function GetDeviceInfoFromRdb()
 
         let newDevice:DeviceClass=new DeviceClass(id,deviceName,deviceType,scene);
 
-        deviceArray.push(newDevice);
+        if(localID<id)
+        {
+          deviceArray.push(newDevice);
+          localID=id;
+        }
+
+
 
         console.info(`id=${id}, name=${deviceName},scene=${scene},deviceType=${deviceType}`);
       }

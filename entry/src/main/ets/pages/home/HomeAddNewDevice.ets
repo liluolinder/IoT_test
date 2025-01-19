@@ -146,6 +146,8 @@ export struct HomeAddNewDevice{
 
       this.isShowAddDevice=false;''
 
+      setTimeout(()=>{GetDeviceInfoFromRdb()},1000);
+
     })
   }
 }

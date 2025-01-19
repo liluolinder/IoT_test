@@ -68,8 +68,6 @@ export default class EntryAbility extends UIAbility {
 
     })
 
-
-;
   }
 
   onWindowStageDestroy(): void {
