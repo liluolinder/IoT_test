@@ -25,7 +25,7 @@ export struct HomeCard{
               {
                 if(item.deviceType=='light')
                 {
-                  NormalLightCard({normalLightName:item.deviceName,scene:item.scene,idInRdb:item.id})
+                  NormalLightCard({normalLightName:item.deviceName,scene:item.scene,idInRdb:item.id,isOpen:item.isOpen==1?true:false,lightBrightness:item.lightBrightness})
                 }
                 else if(item.deviceType=='thermometer')
                 {
@@ -56,7 +56,7 @@ export struct HomeCard{
       setTimeout(()=>{
         this.myDeviceArray=deviceArray;
         this.isRefresh=false
-      },500);
+      },700);           //700ms后刷新
 
     })
 

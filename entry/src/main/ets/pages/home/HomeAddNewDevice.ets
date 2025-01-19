@@ -123,6 +123,7 @@ export struct HomeAddNewDevice{
             'SCENE' :  this.addNewDeviceScene,
             'IS_OPEN' : 0,        //0为关,1为关开,2为不启用
             'DEVICE_TYPE':'light',
+            'LIGHT_BRIGHTNESS':1,
           };
 
         }else if(this.addNewDeviceType.deviceName=='温度计')
@@ -132,7 +133,10 @@ export struct HomeAddNewDevice{
             'SCENE' :  this.addNewDeviceScene,
             'IS_OPEN' :2 ,  //2表示不启用
             'DEVICE_TYPE':'thermometer',
+            'LIGHT_BRIGHTNESS':0,//0表示不启用
           };
+        }else{
+          return
         }
 
       if (storeRdb !== undefined) {

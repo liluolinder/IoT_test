@@ -1,7 +1,8 @@
 import { DefaultHardVibration }from '../../../tools/Vibrator'
 import { promptAction } from "@kit.ArkUI";
 import { CustomContentDialog } from '@kit.ArkUI'
-import { deleteDataFromRDB } from '../../../tools/DoingToRdb';
+import { deleteDataFromRDB, fixStandardThermometerDataFromRDB } from '../../../tools/DoingToRdb';
+import { StandardThermometerClass } from '../../../classes/StandardThermometerClass';
 
 @Component
 export struct StandardThermometer{
@@ -100,6 +101,8 @@ export struct StandardThermometer{
         { value: '确定', buttonStyle: ButtonStyleMode.TEXTUAL,action:()=>{
           this.standardThermometerName=this.standardThermometerNewName;
           this.standardThermometerNewName=''
+          let changeStandardThermometer:StandardThermometerClass=new StandardThermometerClass(this.idInRdb,this.standardThermometerName,this.scene);
+          fixStandardThermometerDataFromRDB(changeStandardThermometer);
         }}],
     }),
   });

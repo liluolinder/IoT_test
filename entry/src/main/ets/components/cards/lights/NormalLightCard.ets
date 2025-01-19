@@ -1,7 +1,8 @@
 import { DefaultHardVibration }from '../../../tools/Vibrator'
 import { promptAction } from "@kit.ArkUI";
 import { CustomContentDialog } from '@kit.ArkUI'
-import { deleteDataFromRDB } from '../../../tools/DoingToRdb';
+import { deleteDataFromRDB, fixNormalLightDataFromRDB } from '../../../tools/DoingToRdb';
+import { NormalLightClass } from '../../../classes/NormalLightClass';
 
 @Component
 export struct NormalLightCard{
@@ -64,7 +65,11 @@ export struct NormalLightCard{
         .height('40')
         .selectedColor('rgba(0,125,255,0.20)')
         .margin({top:10,bottom:20})
-        .onChange(()=>DefaultHardVibration())
+        .onChange(()=> {
+          DefaultHardVibration();
+          let changeNormalLight:NormalLightClass=new NormalLightClass(this.idInRdb,this.normalLightName,this.scene,this.isOpen?1:0,this.lightBrightness)
+          fixNormalLightDataFromRDB(changeNormalLight);
+        })
 
         Text('灯光亮度:').width('95%').textAlign(TextAlign.Start).visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
 
@@ -72,7 +77,11 @@ export struct NormalLightCard{
           .showSteps(true)
           .showTips(true,this.lightBrightness.toString())
           .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
-          .onChange(()=>DefaultHardVibration())
+          .onChange(()=>{
+            DefaultHardVibration();
+            let changeNormalLight:NormalLightClass=new NormalLightClass(this.idInRdb,this.normalLightName,this.scene,this.isOpen?1:0,this.lightBrightness)
+            fixNormalLightDataFromRDB(changeNormalLight);
+          })
 
       }.backgroundColor(Color.White)
       .width('88%')
@@ -114,6 +123,8 @@ export struct NormalLightCard{
                   if(this.normalLightNewName!=''){
                     this.normalLightName=this.normalLightNewName;
                     this.normalLightNewName='';
+                    let changeNormalLight:NormalLightClass=new NormalLightClass(this.idInRdb,this.normalLightName,this.scene,this.isOpen?1:0,this.lightBrightness)
+                    fixNormalLightDataFromRDB(changeNormalLight);
                   }else{
                     
                   }
@@ -160,6 +171,11 @@ export struct NormalLightCard{
 //https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/ts-basic-components-datapanel-V13#colorstop10
 
         Toggle({type:ToggleType.Switch,isOn:$$this.isOpen})
+          .onChange(()=>
+          {
+            let changeNormalLight:NormalLightClass=new NormalLightClass(this.idInRdb,this.normalLightName,this.scene,this.isOpen?1:0,this.lightBrightness)
+            fixNormalLightDataFromRDB(changeNormalLight);
+          })
 
       }.width('90%')
       .height('180')
