@@ -2,7 +2,7 @@ import { NormalLightCard } from '../../components/cards/lights/NormalLightCard'
 import { StandardThermometer } from '../../components/cards/thermometers/StandardThermometer'
 
 import  { DeviceClass } from '../../classes/DeviceClass'
-import { deviceArray, GetDeviceInfoFromRdb} from '../../tools/GetDeviceInfoFromRdb'
+import { deviceArray, GetDeviceInfoFromRdb} from '../../tools/DoingToRdb'
 
 @Component
 export struct HomeCard{
@@ -26,11 +26,11 @@ export struct HomeCard{
               {
                 if(item.deviceType=='light')
                 {
-                  NormalLightCard({normalLightName:item.deviceName})
+                  NormalLightCard({normalLightName:item.deviceName,scene:item.scene,idInRdb:item.id})
                 }
                 else if(item.deviceType=='thermometer')
                 {
-                  StandardThermometer({standardThermometerName:item.deviceName})
+                  StandardThermometer({standardThermometerName:item.deviceName,scene:item.scene,idInRdb:item.id})
                 }
               }
             }
@@ -49,7 +49,6 @@ export struct HomeCard{
           setTimeout(()=>{GetDeviceInfoFromRdb();
             this.myDeviceArray=deviceArray;},100)
         })
-
 
       }
 

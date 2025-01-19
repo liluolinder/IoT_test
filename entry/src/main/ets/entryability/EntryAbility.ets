@@ -2,7 +2,7 @@ import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.Ab
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { relationalStore } from '@kit.ArkData'; // 导入模块
-import { GetDeviceInfoFromRdb } from '../tools/GetDeviceInfoFromRdb'
+import { GetDeviceInfoFromRdb } from '../tools/DoingToRdb'
 
 
 export let storeRdb:relationalStore.RdbStore

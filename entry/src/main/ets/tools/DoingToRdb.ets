@@ -7,10 +7,12 @@ export let deviceArray:Array<DeviceClass>=[]
 
 let localID:number=-1
 
+let predicates = new relationalStore.RdbPredicates("DEVICE_TABLE");
+
 export  function GetDeviceInfoFromRdb()
 {
 
-  let predicates = new relationalStore.RdbPredicates("DEVICE_TABLE");
+
 
   predicates.equalTo("SCENE",'我的家');
 
@@ -43,6 +45,24 @@ export  function GetDeviceInfoFromRdb()
       }
       // 释放数据集的内存
       resultSet.close();
+    })
+  }
+}
+
+export function  deleteDataFromRDB(idInRdb:number)
+{
+  predicates.equalTo('ID',idInRdb);
+
+  if (storeRdb !== undefined) {
+    (storeRdb as relationalStore.RdbStore).delete(predicates, (err: BusinessError, rows: number) => {
+      if (err) {
+        console.error(`Failed to delete data. Code:${err.code}, message:${err.message}`);
+        return;
+      }
+      console.info(`Delete rows: ${rows}`);
+      localID=-1;
+      deviceArray.splice(0,deviceArray.length);
+      GetDeviceInfoFromRdb();
     })
   }
 }

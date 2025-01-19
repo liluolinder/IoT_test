@@ -3,7 +3,7 @@ import {HomeTitleSelectList} from  '../home/HomeTopButton'
 import { relationalStore } from '@kit.ArkData';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { storeRdb } from '../../entryability/EntryAbility'
-import { GetDeviceInfoFromRdb, deviceArray} from  '../../tools/GetDeviceInfoFromRdb'
+import { GetDeviceInfoFromRdb, deviceArray} from '../../tools/DoingToRdb'
 
 @Component
 export struct HomeAddNewDevice{

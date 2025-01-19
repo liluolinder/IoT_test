@@ -1,6 +1,7 @@
 import { DefaultHardVibration }from '../../../tools/Vibrator'
 import { promptAction } from "@kit.ArkUI";
 import { CustomContentDialog } from '@kit.ArkUI'
+import { deleteDataFromRDB } from '../../../tools/DoingToRdb';
 
 @Component
 export struct NormalLightCard{
@@ -10,6 +11,7 @@ export struct NormalLightCard{
   @State normalLightNewName:string=''
 
   @State UUID:string=''
+  @State idInRdb:number=-1
 
   @State scene:string=''
 
@@ -93,9 +95,7 @@ export struct NormalLightCard{
         })
       MenuItem({content: "删除设备" })
         .onClick(()=>{
-          promptAction.showToast({
-            message: '没做',
-          });
+         deleteDataFromRDB(this.idInRdb);
         })
 
     }.width('120')
