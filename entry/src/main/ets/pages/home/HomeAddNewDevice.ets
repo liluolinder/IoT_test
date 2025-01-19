@@ -9,6 +9,7 @@ import { GetDeviceInfoFromRdb, deviceArray} from '../../tools/DoingToRdb'
 export struct HomeAddNewDevice{
 
   @StorageLink('isAddDeviceSheetShow') isShowAddDevice: boolean = false;
+  @StorageLink('isHomeRefresh') isHomeRefresh:boolean=false
 
   @State isFirstStepNext:boolean=false
 
@@ -146,7 +147,9 @@ export struct HomeAddNewDevice{
 
       this.isShowAddDevice=false;''
 
-      setTimeout(()=>{GetDeviceInfoFromRdb()},1000);
+      setTimeout(()=>{
+        this.isHomeRefresh=true;
+      },50);
 
     })
   }

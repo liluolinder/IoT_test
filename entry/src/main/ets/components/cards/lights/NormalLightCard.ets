@@ -6,6 +6,7 @@ import { deleteDataFromRDB } from '../../../tools/DoingToRdb';
 @Component
 export struct NormalLightCard{
 
+  @StorageLink('isHomeRefresh') isHomeRefresh:boolean=false
 
   @State normalLightName:string='卧室的灯'
   @State normalLightNewName:string=''
@@ -18,8 +19,6 @@ export struct NormalLightCard{
   @State isOpen:boolean=false
 
   @State lightBrightness:number=1
-
-
 
   @State normalLightOff:Resource=$r('app.media.normalLightOff')
   @State normalLightOn:Resource=$r('app.media.normalLightOn')
@@ -96,6 +95,7 @@ export struct NormalLightCard{
       MenuItem({content: "删除设备" })
         .onClick(()=>{
          deleteDataFromRDB(this.idInRdb);
+          this.isHomeRefresh=true;
         })
 
     }.width('120')

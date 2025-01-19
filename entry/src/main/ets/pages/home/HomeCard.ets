@@ -8,8 +8,7 @@ import { deviceArray, GetDeviceInfoFromRdb} from '../../tools/DoingToRdb'
 export struct HomeCard{
 
   @State myDeviceArray:Array<DeviceClass>=[]
-  @State isRefresh:boolean=false
-
+  @StorageLink('isHomeRefresh') isRefresh:boolean=false
 
   build() {
 
@@ -54,8 +53,11 @@ export struct HomeCard{
 
     }.onRefreshing(()=>{
       GetDeviceInfoFromRdb();
-      this.myDeviceArray=deviceArray;
-      setTimeout(()=>{this.isRefresh=false},1000);
+      setTimeout(()=>{
+        this.myDeviceArray=deviceArray;
+        this.isRefresh=false
+      },500);
+
     })
 
 

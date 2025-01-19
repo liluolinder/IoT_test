@@ -6,6 +6,8 @@ import { deleteDataFromRDB } from '../../../tools/DoingToRdb';
 @Component
 export struct StandardThermometer{
 
+  @StorageLink('isHomeRefresh') isHomeRefresh:boolean=false
+
   @State currentTemp:number=5
 
   @State standardThermometerName:string='温度计'
@@ -80,6 +82,7 @@ export struct StandardThermometer{
       MenuItem({content: "删除设备" })
         .onClick(()=>{
           deleteDataFromRDB(this.idInRdb);
+          this.isHomeRefresh=true;
         })
 
     }.width('120')
