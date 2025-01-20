@@ -31,8 +31,6 @@ export default class EntryAbility extends UIAbility {
 
     });
 
-    PersistentStorage.persistProp('isAddDeviceSheetShow', false);
-    PersistentStorage.persistProp('isHomeRefresh', false);
 
     const STORE_CONFIG :relationalStore.StoreConfig= {
       name: 'iotDeviceRdb.db', // 数据库文件名

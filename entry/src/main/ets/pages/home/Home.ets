@@ -1,7 +1,7 @@
 import {HomeTopButton} from './HomeTopButton'
 import {HomeCard} from './HomeCard'
 
-@Component
+@ComponentV2
 export struct Home {
 
   build() {

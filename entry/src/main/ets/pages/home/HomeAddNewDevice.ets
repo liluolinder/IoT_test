@@ -3,34 +3,36 @@ import {HomeTitleSelectList} from  '../home/HomeTopButton'
 import { relationalStore } from '@kit.ArkData';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { storeRdb } from '../../entryability/EntryAbility'
-import { GetDeviceInfoFromRdb, deviceArray} from '../../tools/DoingToRdb'
+import { HomeCardData } from '../../classes/AppStorageV2/HomeCardData';
+import { AppStorageV2 } from '@kit.ArkUI';
 
-@Component
+@ComponentV2
 export struct HomeAddNewDevice{
 
-  @StorageLink('isAddDeviceSheetShow') isShowAddDevice: boolean = false;
-  @StorageLink('isHomeRefresh') isHomeRefresh:boolean=false
+   @Local homeCardData:HomeCardData = AppStorageV2.connect(HomeCardData,()=>new HomeCardData())!;
 
-  @State isFirstStepNext:boolean=false
+   @Consumer('isShowAddDevice')isShowAddDevice:boolean = false;
 
-  @State addNewDeviceType:newDeviceClass=new newDeviceClass('',$r('app.media.addNew'))
+   @Local isFirstStepNext:boolean=false;
 
-  @State addNewDeviceName:string=''
+   @Local addNewDeviceType:newDeviceClass=new newDeviceClass('',$r('app.media.addNew'));
 
-  @State addNewDeviceScene:string=''
+   @Local addNewDeviceName:string='';
 
-  @State isOpen:boolean=false
+   @Local addNewDeviceScene:string='';
 
-  @State valueBucket: relationalStore.ValuesBucket | undefined= undefined
+   @Local isOpen:boolean=false;
 
-  @State newDevice:DeviceClass|undefined=undefined
+   @Local valueBucket: relationalStore.ValuesBucket | undefined= undefined;
 
-  @State newDeviceArrary:Array<newDeviceClass>=[
+   @Local newDevice:DeviceClass|undefined=undefined;
+
+   @Local newDeviceArrary:Array<newDeviceClass>=[
     new newDeviceClass('灯',$r('app.media.normalLightOff')),
     new newDeviceClass('温度计',$r('app.media.thermometer')),
     new newDeviceClass('电视',$r('app.media.startIcon')),
     new newDeviceClass('空调',$r('app.media.startIcon')),
-  ]
+  ];
 
   build() {
     Stepper(){
@@ -40,7 +42,7 @@ export struct HomeAddNewDevice{
           Text('选择设备类型')
 
           Grid(){
-            ForEach(this.newDeviceArrary,(item:newDeviceClass,id:number)=>{
+            ForEach(this.newDeviceArrary,(item:newDeviceClass)=>{
               GridItem(){
                 Column(){
                   Image(item.devicePic)
@@ -149,11 +151,10 @@ export struct HomeAddNewDevice{
         })
       }
 
-      this.isShowAddDevice=false;''
+      this.isShowAddDevice=false;
 
-      setTimeout(()=>{
-        this.isHomeRefresh=true;
-      },50);
+      setTimeout(()=>{this.homeCardData.isRefresh=true;}
+      ,50)
 
     })
   }

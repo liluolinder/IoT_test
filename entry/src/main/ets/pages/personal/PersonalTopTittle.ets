@@ -1,7 +1,6 @@
 
-@Component
+@ComponentV2
 export  struct PersonalTopTittle {
-  @State message: string = 'Hello World';
 
   build() {
 

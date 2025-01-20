@@ -2,7 +2,7 @@ import {PersonalTopTittle} from './PersonalTopTittle'
 import {PersonalInfo} from './PersonalInfo'
 import {PersonalButtonList} from './PersonalButtonList'
 
-@Component
+@ComponentV2
 export struct  Personal {
 
   build() {

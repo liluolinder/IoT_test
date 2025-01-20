@@ -1,16 +1,16 @@
 import {PersonalBodyButtonClass} from '../../classes/PersonalBodyButtonClass'
 import {PersonalPrivacyButton} from  './PersonalPrivacyButton'
 
-@Component
+@ComponentV2
 export  struct PersonalButtonList {
 
-  @State isShowPrivacyManage:boolean=false;
+  @Local isShowPrivacyManage:boolean=false;
 
-  @State PersonalButtonLists1:Array<PersonalBodyButtonClass>  = [
+  @Local PersonalButtonLists1:Array<PersonalBodyButtonClass>  = [
     new PersonalBodyButtonClass("0","设置","",false),
     new PersonalBodyButtonClass("1","关于我们","",false)];
 
-  @State PersonalButtonLists2:Array<PersonalBodyButtonClass>  = [
+  @Local PersonalButtonLists2:Array<PersonalBodyButtonClass>  = [
     new PersonalBodyButtonClass("0","反馈","",false),
     new PersonalBodyButtonClass("1","帮助","",false),
     new PersonalBodyButtonClass("2","隐私管理","",true)];

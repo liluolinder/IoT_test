@@ -1,23 +1,24 @@
 import { DefaultHardVibration }from '../../../tools/Vibrator'
-import { promptAction } from "@kit.ArkUI";
+import { AppStorageV2 } from "@kit.ArkUI";
 import { CustomContentDialog } from '@kit.ArkUI'
 import { deleteDataFromRDB, fixStandardThermometerDataFromRDB } from '../../../tools/DoingToRdb';
 import { StandardThermometerClass } from '../../../classes/StandardThermometerClass';
+import { HomeCardData } from '../../../classes/AppStorageV2/HomeCardData';
 
-@Component
+@ComponentV2
 export struct StandardThermometer{
 
-  @StorageLink('isHomeRefresh') isHomeRefresh:boolean=false
+  @Local homeCardData:HomeCardData = AppStorageV2.connect(HomeCardData,()=>new HomeCardData())!;
 
-  @State currentTemp:number=5
+  @Local currentTemp:number=5;
 
-  @State standardThermometerName:string='温度计'
-  @State standardThermometerNewName:string=''
+  @Param @Once standardThermometerName:string='温度计';
+  @Local standardThermometerNewName:string='';
 
-  @State scene:string=''
-  @State idInRdb:number=-1
+  @Param @Once scene:string='';
+  @Param @Once idInRdb:number=-1;
 
-  @State standardThermometerPic:Resource=$r('app.media.thermometer')
+  @Local standardThermometerPic:Resource=$r('app.media.thermometer');
 
 
   @Builder
@@ -83,7 +84,7 @@ export struct StandardThermometer{
       MenuItem({content: "删除设备" })
         .onClick(()=>{
           deleteDataFromRDB(this.idInRdb);
-          this.isHomeRefresh=true;
+          this.homeCardData.isRefresh=true;
         })
 
     }.width('120')

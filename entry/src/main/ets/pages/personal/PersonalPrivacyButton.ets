@@ -1,12 +1,12 @@
 import {PersonalBodyButtonClass} from '../../classes/PersonalBodyButtonClass'
 
-@Component
+@ComponentV2
 export struct PersonalPrivacyButton{
 
-  @State personalPrivacyButtonArray:Array<PersonalBodyButtonClass>=[
+  @Local personalPrivacyButtonArray:Array<PersonalBodyButtonClass>=[
     new PersonalBodyButtonClass('0','隐私声明摘要','',false),
     new PersonalBodyButtonClass('1','已收集个人信息清单','',false)
-  ]
+  ];
 
   build() {
 

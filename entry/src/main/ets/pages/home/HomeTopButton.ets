@@ -7,18 +7,18 @@ import { BusinessError } from '@kit.BasicServicesKit';
 
 export let HomeTitleSelectList:Array<SelectOption>=[{value:'我的家'},{value:'???'}];
 
-@Component
+@ComponentV2
 export struct HomeTopButton {
 
-  @StorageLink('isAddDeviceSheetShow') isShowAddDevice: boolean = false;
+  @Provider('isShowAddDevice') isShowAddDevice: boolean = false;
 
-  @State isShowAddGround:boolean=false;
+  @Local isShowAddGround:boolean=false;
 
-  @State isScanCode:boolean=false;
+  @Local isScanCode:boolean=false;
 
-  @State index:number=1;
+  @Local index:number=1;
 
-  @State codeResult:string='';
+  @Local codeResult:string='';
 
   @Builder HomeAddDeviceBuildSheet() {
     HomeAddNewDevice()

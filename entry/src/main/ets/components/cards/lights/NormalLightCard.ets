@@ -1,28 +1,28 @@
 import { DefaultHardVibration }from '../../../tools/Vibrator'
-import { promptAction } from "@kit.ArkUI";
-import { CustomContentDialog } from '@kit.ArkUI'
+import { AppStorageV2, CustomContentDialog } from '@kit.ArkUI'
 import { deleteDataFromRDB, fixNormalLightDataFromRDB } from '../../../tools/DoingToRdb';
 import { NormalLightClass } from '../../../classes/NormalLightClass';
+import { HomeCardData } from '../../../classes/AppStorageV2/HomeCardData';
 
-@Component
+@ComponentV2
 export struct NormalLightCard{
 
-  @StorageLink('isHomeRefresh') isHomeRefresh:boolean=false
+  @Local homeCardData:HomeCardData = AppStorageV2.connect(HomeCardData,()=>new HomeCardData())!;
 
-  @State normalLightName:string='卧室的灯'
-  @State normalLightNewName:string=''
+  @Param @Once normalLightName:string='卧室的灯';
+  @Local normalLightNewName:string='';
 
-  @State UUID:string=''
-  @State idInRdb:number=-1
+  @Param @Once UUID:string='';
+  @Param @Once idInRdb:number=-1;
 
-  @State scene:string=''
+  @Param @Once scene:string='';
 
-  @State isOpen:boolean=false
+  @Param @Once isOpen:boolean=false;
 
-  @State lightBrightness:number=1
+  @Param @Once lightBrightness:number=1;
 
-  @State normalLightOff:Resource=$r('app.media.normalLightOff')
-  @State normalLightOn:Resource=$r('app.media.normalLightOn')
+  @Param @Once normalLightOff:Resource=$r('app.media.normalLightOff');
+  @Param @Once normalLightOn:Resource=$r('app.media.normalLightOn');
 
   @Builder
   NormalLightCardPreview(){
@@ -104,7 +104,7 @@ export struct NormalLightCard{
       MenuItem({content: "删除设备" })
         .onClick(()=>{
          deleteDataFromRDB(this.idInRdb);
-          this.isHomeRefresh=true;
+          this.homeCardData.isRefresh=true;
         })
 
     }.width('120')

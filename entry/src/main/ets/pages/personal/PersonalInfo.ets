@@ -1,11 +1,13 @@
 import { BusinessError } from '@ohos.base';
 import { photoAccessHelper } from '@kit.MediaLibraryKit';
 
-@Component
+@ComponentV2
 export  struct PersonalInfo {
 
-  @State isShow:boolean=false;
-  @State userName:string='暂未登录';
+  @Local isShow:boolean=false;
+  @Local userName:string='暂未登录';
+
+
 
   @Builder
   PersonalLogInBuildSheet()
