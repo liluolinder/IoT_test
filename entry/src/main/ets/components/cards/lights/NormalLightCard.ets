@@ -2,12 +2,12 @@ import { DefaultHardVibration }from '../../../tools/Vibrator'
 import { AppStorageV2, CustomContentDialog } from '@kit.ArkUI'
 import { deleteDataFromRDB, fixNormalLightDataFromRDB } from '../../../tools/DoingToRdb';
 import { NormalLightClass } from '../../../classes/NormalLightClass';
-import { HomeCardData } from '../../../classes/AppStorageV2/HomeCardData';
+import { CacheSHareDataData } from '../../../classes/AppStorageV2/CacheShareData';
 
 @ComponentV2
 export struct NormalLightCard{
 
-  @Local homeCardData:HomeCardData = AppStorageV2.connect(HomeCardData,()=>new HomeCardData())!;
+  @Local cacheSHareDataData:CacheSHareDataData = AppStorageV2.connect(CacheSHareDataData,()=>new CacheSHareDataData())!;
 
   @Param @Once normalLightName:string='卧室的灯';
   @Local normalLightNewName:string='';
@@ -104,7 +104,7 @@ export struct NormalLightCard{
       MenuItem({content: "删除设备" })
         .onClick(()=>{
          deleteDataFromRDB(this.idInRdb);
-          this.homeCardData.isRefresh=true;
+          this.cacheSHareDataData.isRefresh=true;
         })
 
     }.width('120')

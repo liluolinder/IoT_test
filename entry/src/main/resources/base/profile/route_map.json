@@ -1,0 +1,14 @@
+{
+  "routerMap": [
+    {
+      "name" : "PrivacyStatementSummary",
+      "pageSourceFile"  : "src/main/ets/pages/personal/PrivacyStatementSummary.ets",
+      "buildFunction" : "PrivacyStatementSummaryBuilder"
+    },
+    {
+      "name" : "PersonalInformationCollected",
+      "pageSourceFile"  : "src/main/ets/pages/personal/PersonalInformationCollected.ets",
+      "buildFunction" : "PersonalInformationCollectedBuilder"
+    }
+  ]
+}

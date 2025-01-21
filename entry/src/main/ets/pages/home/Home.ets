@@ -1,5 +1,6 @@
 import {HomeTopButton} from './HomeTopButton'
 import {HomeCard} from './HomeCard'
+import { HomeSceneTab } from './HomeSceneTab'
 
 @ComponentV2
 export struct Home {

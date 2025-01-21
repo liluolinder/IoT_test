@@ -3,13 +3,13 @@ import {HomeTitleSelectList} from  '../home/HomeTopButton'
 import { relationalStore } from '@kit.ArkData';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { storeRdb } from '../../entryability/EntryAbility'
-import { HomeCardData } from '../../classes/AppStorageV2/HomeCardData';
+import { CacheSHareDataData } from '../../classes/AppStorageV2/CacheShareData';
 import { AppStorageV2 } from '@kit.ArkUI';
 
 @ComponentV2
 export struct HomeAddNewDevice{
 
-   @Local homeCardData:HomeCardData = AppStorageV2.connect(HomeCardData,()=>new HomeCardData())!;
+   @Local cacheSHareDataData:CacheSHareDataData = AppStorageV2.connect(CacheSHareDataData,()=>new CacheSHareDataData())!;
 
    @Consumer('isShowAddDevice')isShowAddDevice:boolean = false;
 
@@ -153,7 +153,7 @@ export struct HomeAddNewDevice{
 
       this.isShowAddDevice=false;
 
-      setTimeout(()=>{this.homeCardData.isRefresh=true;}
+      setTimeout(()=>{this.cacheSHareDataData.isRefresh=true;}
       ,50)
 
     })

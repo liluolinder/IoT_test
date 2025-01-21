@@ -3,12 +3,12 @@ import { AppStorageV2 } from "@kit.ArkUI";
 import { CustomContentDialog } from '@kit.ArkUI'
 import { deleteDataFromRDB, fixStandardThermometerDataFromRDB } from '../../../tools/DoingToRdb';
 import { StandardThermometerClass } from '../../../classes/StandardThermometerClass';
-import { HomeCardData } from '../../../classes/AppStorageV2/HomeCardData';
+import { CacheSHareDataData } from '../../../classes/AppStorageV2/CacheShareData';
 
 @ComponentV2
 export struct StandardThermometer{
 
-  @Local homeCardData:HomeCardData = AppStorageV2.connect(HomeCardData,()=>new HomeCardData())!;
+  @Local cacheSHareDataData:CacheSHareDataData = AppStorageV2.connect(CacheSHareDataData,()=>new CacheSHareDataData())!;
 
   @Local currentTemp:number=5;
 
@@ -84,7 +84,7 @@ export struct StandardThermometer{
       MenuItem({content: "删除设备" })
         .onClick(()=>{
           deleteDataFromRDB(this.idInRdb);
-          this.homeCardData.isRefresh=true;
+          this.cacheSHareDataData.isRefresh=true;
         })
 
     }.width('120')

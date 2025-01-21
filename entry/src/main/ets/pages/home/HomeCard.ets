@@ -4,7 +4,7 @@ import { StandardThermometer } from '../../components/cards/thermometers/Standar
 import  { DeviceClass } from '../../classes/DeviceClass'
 import { deviceArray, GetDeviceInfoFromRdb} from '../../tools/DoingToRdb'
 import { AppStorageV2 } from '@kit.ArkUI';
-import { HomeCardData } from '../../classes/AppStorageV2/HomeCardData';
+import { CacheSHareDataData } from '../../classes/AppStorageV2/CacheShareData';
 
 @ComponentV2
 export struct HomeCard{
@@ -13,12 +13,12 @@ export struct HomeCard{
 
   @Provider('isHomeRefresh') isRefresh:boolean=false;
 
-  @Local homeCardData:HomeCardData = AppStorageV2.connect(HomeCardData,()=>new HomeCardData())!;
+  @Local cacheSHareDataData:CacheSHareDataData = AppStorageV2.connect(CacheSHareDataData,()=>new CacheSHareDataData())!;
 
 
   build() {
 
-    Refresh({refreshing:$$this.homeCardData.isRefresh}){
+    Refresh({refreshing:$$this.cacheSHareDataData.isRefresh}){
 
       Column(){
 
@@ -61,7 +61,7 @@ export struct HomeCard{
       GetDeviceInfoFromRdb();
       setTimeout(()=>{
         this.myDeviceArray=deviceArray;
-        this.homeCardData.isRefresh=false;
+        this.cacheSHareDataData.isRefresh=false;
       },700);           //700ms后刷新
 
     })

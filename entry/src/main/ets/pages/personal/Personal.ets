@@ -1,14 +1,14 @@
 import {PersonalTopTittle} from './PersonalTopTittle'
 import {PersonalInfo} from './PersonalInfo'
 import {PersonalButtonList} from './PersonalButtonList'
+import { LengthMetrics } from '@kit.ArkUI'
 
 @ComponentV2
 export struct  Personal {
 
   build() {
 
-    Column(){
-
+    Navigation(){
       PersonalTopTittle()             //调用同目录下PersonalTopTittle.ets
 
       Scroll(){
@@ -25,10 +25,19 @@ export struct  Personal {
       .scrollBar(BarState.Off)                      //不显示滑动条
       .edgeEffect(EdgeEffect.Spring,{alwaysEnabled: true})    //弹性滑动动效
       .height('100%')
+    }.height('100%')
+    .minContentWidth(400)
+    .mode(NavigationMode.Stack)
+
+
+
+    /*Column(){
+
+
 
 
     }
-    .height('100%')
+    .height('100%')*/
 
   }
 
