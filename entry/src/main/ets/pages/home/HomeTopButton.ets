@@ -3,16 +3,27 @@ import { HomeScanCode } from './HomeScanCode'
 import { scanCore, scanBarcode } from '@kit.ScanKit';
 
 import { BusinessError } from '@kit.BasicServicesKit';
+import { CacheSHareDataData } from '../../classes/AppStorageV2/CacheShareData';
+import { AppStorageV2 } from '@kit.ArkUI';
+import { HomeAddNewScene } from './HomeAddNewScene';
 
 
-export let HomeTitleSelectList:Array<SelectOption>=[{value:'我的家'},{value:'???'}];
+@Builder export function HomeTopButtonBuilder()
+{
+  HomeTopButton()
+}
+
+
 
 @ComponentV2
 export struct HomeTopButton {
+  @Local HomeTitleSelectList:Array<SelectOption>=[{value:'我的家'},{value:'???'}];
+
+  @Local cacheSHareDataData:CacheSHareDataData = AppStorageV2.connect(CacheSHareDataData,()=>new CacheSHareDataData())!;
 
   @Provider('isShowAddDevice') isShowAddDevice: boolean = false;
 
-  @Local isShowAddGround:boolean=false;
+  @Provider('isShowAddScene') isShowAddScene:boolean=false;
 
   @Local isScanCode:boolean=false;
 
@@ -26,10 +37,7 @@ export struct HomeTopButton {
 
   @Builder
   HomeAddGroundBuildSheet() {
-    Column()
-    {
-      Text('没做')
-    }
+    HomeAddNewScene()
   }
 
   @Builder
@@ -52,7 +60,7 @@ export struct HomeTopButton {
 
       MenuItem({content: "创建场景" })
         .onClick(()=>{
-          this.isShowAddGround=true;
+          this.isShowAddScene=true;
         })
 
       MenuItem({content: "扫一扫" })
@@ -76,7 +84,7 @@ export struct HomeTopButton {
   build() {
 
     Row(){
-      Select(HomeTitleSelectList)
+      /*Select(HomeTitleSelectList)
         .selected(0)
         .value(HomeTitleSelectList==null?'暂未创建场景':HomeTitleSelectList[0].value)
         .font({ size: 22, weight: FontWeight.Bolder })
@@ -86,15 +94,17 @@ export struct HomeTopButton {
         .menuAlign(MenuAlignType.START, {dx:0, dy:0})
         .optionWidth(200)
         .optionHeight(300)
-        .width('60%')
+        .width('60%')*/
 
       Blank()
-        .bindSheet($$this.isShowAddGround,this.HomeAddGroundBuildSheet(),
+        .bindSheet($$this.isShowAddScene,this.HomeAddGroundBuildSheet(),
         {
           title:{title:'添加场景',subtitle:'Add a new ground'},
+          height:200,
           preferType:SheetType.BOTTOM,
 
         })
+
 
       Blank()
         .bindSheet($$this.isScanCode,this.HomeScanCodeBuildSheet(),
@@ -106,21 +116,26 @@ export struct HomeTopButton {
 
 
       Button(){
-        Image($r('app.media.addNew'))
-          .height('35')
+        SymbolGlyph($r('sys.symbol.plus')).fontSize('35')
 
       }.type(ButtonType.Circle)
-      .backgroundColor(Color.White)
-      .height('35')
+      .backgroundColor('#F1F3F5')
       .bindMenu(this.TopAddMenu())
       .bindSheet($$this.isShowAddDevice,this.HomeAddDeviceBuildSheet(),
         {
           title:{title:'添加设备',subtitle:'Add a new device'},
           preferType:SheetType.BOTTOM,
         })
+      .margin({right:10})
 
-    }
-    .width('90%')
+      Button(){
+       SymbolGlyph($r('sys.symbol.dot_grid_2x2')).fontSize('35')
+
+      }.type(ButtonType.Circle)
+      .backgroundColor('#F1F3F5')
+      .onClick(()=>{this.cacheSHareDataData.showHomeSideBar=true})
+
+    }.alignItems(VerticalAlign.Bottom)
 
   }
 

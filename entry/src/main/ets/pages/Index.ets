@@ -20,11 +20,6 @@ struct Index {
 
       }.tabBar('主页').expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])//沉浸式拓展安全区
 
-      TabContent() {
-
-
-
-      }.tabBar('场景').expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])//沉浸式拓展安全区
 
       TabContent() {
 

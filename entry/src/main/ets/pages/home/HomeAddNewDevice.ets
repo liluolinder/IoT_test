@@ -1,17 +1,23 @@
 import { DeviceClass, newDeviceClass} from '../../classes/DeviceClass'
-import {HomeTitleSelectList} from  '../home/HomeTopButton'
+
 import { relationalStore } from '@kit.ArkData';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { storeRdb } from '../../entryability/EntryAbility'
 import { CacheSHareDataData } from '../../classes/AppStorageV2/CacheShareData';
-import { AppStorageV2 } from '@kit.ArkUI';
+import { AppStorageV2, PersistenceV2 } from '@kit.ArkUI';
+import { PersistentShareData } from '../../classes/PersistenceV2/PersistentShareData';
+import { sceneArray, sceneArraySelect } from '../../tools/DoingToRdb';
 
 @ComponentV2
 export struct HomeAddNewDevice{
 
    @Local cacheSHareDataData:CacheSHareDataData = AppStorageV2.connect(CacheSHareDataData,()=>new CacheSHareDataData())!;
+   @Local persistentShareData:PersistentShareData=PersistenceV2.connect(PersistentShareData,()=>new PersistentShareData)!;
 
-   @Consumer('isShowAddDevice')isShowAddDevice:boolean = false;
+   @Local sceneSelectArray:Array<SelectOption>=[];
+
+
+  @Consumer('isShowAddDevice')isShowAddDevice:boolean = false;
 
    @Local isFirstStepNext:boolean=false;
 
@@ -33,6 +39,8 @@ export struct HomeAddNewDevice{
     new newDeviceClass('电视',$r('app.media.startIcon')),
     new newDeviceClass('空调',$r('app.media.startIcon')),
   ];
+
+
 
   build() {
     Stepper(){
@@ -105,7 +113,7 @@ export struct HomeAddNewDevice{
             .margin({bottom:10})
             .width('100%')
 
-          Select(HomeTitleSelectList).width('100%').onSelect((index:number, text: string )=>{
+          Select(sceneArraySelect).width('100%').onSelect((index:number, text: string )=>{
             this.addNewDeviceScene=text;
           })
 
@@ -157,5 +165,6 @@ export struct HomeAddNewDevice{
       ,50)
 
     })
+
   }
 }

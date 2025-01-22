@@ -45,7 +45,7 @@ export default class EntryAbility extends UIAbility {
 
 
     const SQL_CREATE_SCENE_TABLE =
-      'CREACREATE TABLE IF NOT EXISTS SCENE_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, SCENE TEXT NOT NULL  )'; // 建表Sql语句, IDENTITY为bigint类型，sql中指定类型为UNLIMITED INT
+      'CREATE TABLE IF NOT EXISTS SCENE_TABLE (ID INTEGER PRIMARY KEY AUTOINCREMENT, SCENE TEXT NOT NULL , TYPE TEXT NOT NULL  )'; // 建表Sql语句, IDENTITY为bigint类型，sql中指定类型为UNLIMITED INT
 
 
     relationalStore.getRdbStore(this.context , STORE_CONFIG , (err,store) =>{
@@ -63,6 +63,7 @@ export default class EntryAbility extends UIAbility {
         store.executeSql(SQL_CREATE_SCENE_TABLE); // 创建数据表
         // 设置数据库的版本，入参为大于0的整数
         store.version = 1;
+
       }
 
     })

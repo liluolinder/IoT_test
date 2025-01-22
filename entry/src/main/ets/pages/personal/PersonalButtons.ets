@@ -74,7 +74,7 @@ export struct PersonalButtons
 
         Blank()
 
-        SymbolGlyph($r('sys.symbol.chevron_right')).fontSize(30)
+        SymbolGlyph($r('sys.symbol.chevron_right')).fontSize(26)
 
       }.width('95%')
 

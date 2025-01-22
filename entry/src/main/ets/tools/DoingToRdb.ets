@@ -3,18 +3,23 @@ import { relationalStore } from '@kit.ArkData'
 import { BusinessError } from '@kit.BasicServicesKit';
 import { DeviceClass } from '../classes/DeviceClass'
 import { NormalLightClass } from '../classes/NormalLightClass';
-import { StandardThermometer } from '../components/cards/thermometers/StandardThermometer';
 import { StandardThermometerClass } from '../classes/StandardThermometerClass';
-
-export let deviceArray:Array<DeviceClass>=[]
+import { PersistentShareData } from '../classes/PersistenceV2/PersistentShareData';
+import { PersistenceV2 } from '@kit.ArkUI';
 
 let localID:number=-1
+let localSceneID:number=-1
+
+export let deviceArray:Array<DeviceClass>=[]
+export let sceneArraySelect:Array<SelectOption>=[]
+export let sceneArray:Array<string>=['全部']
+
+
+let persistentShareData:PersistentShareData=PersistenceV2.connect(PersistentShareData,()=>new PersistentShareData)!;
 
 export  function GetDeviceInfoFromRdb()
 {
   let predicates = new relationalStore.RdbPredicates("DEVICE_TABLE");
-  predicates.equalTo("SCENE",'我的家');
-
 
   if(storeRdb!==undefined)
   {
@@ -48,6 +53,43 @@ export  function GetDeviceInfoFromRdb()
   }
 }
 
+export  function GetSceneInfoFromRdb()
+{
+  let predicates = new relationalStore.RdbPredicates("SCENE_TABLE");
+  predicates.equalTo("TYPE",'scene');
+
+
+  if(storeRdb!==undefined)
+  {
+    (storeRdb as relationalStore.RdbStore).query(predicates, ['ID', 'SCENE'], (err: BusinessError, resultSet) => {
+      if (err) {
+        console.error(`Failed to query data. Code:${err.code}, message:${err.message}`);
+        return;
+      }
+      console.info(`ResultSet column names: ${resultSet.columnNames}, column count: ${resultSet.columnCount}`);
+      // resultSet是一个数据集合的游标，默认指向第-1个记录，有效的数据从0开始。
+      while (resultSet.goToNextRow()) {
+        const id=resultSet.getLong(resultSet.getColumnIndex('ID'));
+        const sceneName=resultSet.getString(resultSet.getColumnIndex('SCENE'));
+
+        if(localSceneID<id)
+        {
+          sceneArraySelect.push({value:sceneName});
+          localSceneID=id;
+        }
+        if(persistentShareData.localSceneID<id)
+        {
+          persistentShareData.sceneArray.push(sceneName);
+          persistentShareData.localSceneID =id;
+        }
+        console.info(`id=${id}, name=${sceneName}`);
+      }
+      // 释放数据集的内存
+      resultSet.close();
+    })
+  }
+}
+
 export function  deleteDataFromRDB(idInRdb:number)
 {
   let predicates = new relationalStore.RdbPredicates("DEVICE_TABLE");
@@ -62,6 +104,7 @@ export function  deleteDataFromRDB(idInRdb:number)
       console.info(`Delete rows: ${rows}`);
 
       deviceArray.splice(0,deviceArray.length);
+
       localID=-1;
     })
   }

@@ -31,6 +31,7 @@ export struct PrivacyStatementSummary{
     .onWillDisappear(()=>this.cacheSHareDataData.isLookPrivacyStatement=false)
     .title('隐私声明摘要')
     .backgroundColor('#F1F3F5')
+    
 
   }
 

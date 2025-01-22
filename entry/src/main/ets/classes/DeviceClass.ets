@@ -9,7 +9,7 @@ export class newDeviceClass
   }
 
 }
-
+@ObservedV2
 export class DeviceClass
 {
   id:number=0;

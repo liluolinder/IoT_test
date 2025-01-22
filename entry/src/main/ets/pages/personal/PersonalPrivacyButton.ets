@@ -32,7 +32,7 @@ export struct PersonalPrivacyButton{
 
                   Blank()
 
-                  SymbolGlyph($r('sys.symbol.chevron_right')).fontSize(30)
+                  SymbolGlyph($r('sys.symbol.chevron_right')).fontSize(26)
 
                 }
 
@@ -43,15 +43,19 @@ export struct PersonalPrivacyButton{
               .borderRadius('10')
               .onClick(()=>
               {
-                if(id==0)
-                {
-                  this.pathStack.pushPathByName(`PrivacyStatementSummary`, null);
-                }else{
-                  this.pathStack.pushPathByName(`PersonalInformationCollected`, null);
-
-                }
 
                 this.cacheSHareDataData.isLookPrivacyStatement=true;
+
+               setTimeout(()=>{
+                 if(id==0)
+                 {
+                   this.pathStack.pushPathByName(`PrivacyStatementSummary`, null);
+                 }else{
+                   this.pathStack.pushPathByName(`PersonalInformationCollected`, null);
+                 }
+               },50)
+
+
               })
 
               if (id < this.personalPrivacyButtonArray.length - 1) {
@@ -71,7 +75,7 @@ export struct PersonalPrivacyButton{
       .scrollable(ScrollDirection.Vertical)        //垂直方向滑动
       .scrollBar(BarState.Off)                      //不显示滑动条
       .edgeEffect(EdgeEffect.Spring,{alwaysEnabled: true})    //弹性滑动动效
-    }
+    }.navBarWidth('300')
 
   }
 

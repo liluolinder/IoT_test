@@ -2,19 +2,25 @@ import { NormalLightCard } from '../../components/cards/lights/NormalLightCard'
 import { StandardThermometer } from '../../components/cards/thermometers/StandardThermometer'
 
 import  { DeviceClass } from '../../classes/DeviceClass'
-import { deviceArray, GetDeviceInfoFromRdb} from '../../tools/DoingToRdb'
-import { AppStorageV2 } from '@kit.ArkUI';
+import { deviceArray, GetDeviceInfoFromRdb, GetSceneInfoFromRdb} from '../../tools/DoingToRdb'
+import { AppStorageV2, PersistenceV2 } from '@kit.ArkUI';
 import { CacheSHareDataData } from '../../classes/AppStorageV2/CacheShareData';
+import { PersistentShareData } from '../../classes/PersistenceV2/PersistentShareData';
+import { HomeTopButtonBuilder } from './HomeTopButton';
+import { HomeScene } from './HomeScene';
 
 @ComponentV2
 export struct HomeCard{
-
-  @Local myDeviceArray:Array<DeviceClass>=[];
 
   @Provider('isHomeRefresh') isRefresh:boolean=false;
 
   @Local cacheSHareDataData:CacheSHareDataData = AppStorageV2.connect(CacheSHareDataData,()=>new CacheSHareDataData())!;
 
+  @Local persistentShareData:PersistentShareData=PersistenceV2.connect(PersistentShareData,()=>new PersistentShareData)!;
+
+  @Param@Once localScene:string=''
+
+  @Local deviceArray:Array<DeviceClass>=deviceArray;
 
   build() {
 
@@ -24,8 +30,21 @@ export struct HomeCard{
 
         Grid(){
 
-          ForEach(this.myDeviceArray,(item:DeviceClass,id:number)=>{
-            if(item.scene=='我的家')
+          ForEach(this.deviceArray,(item:DeviceClass,id:number)=>{
+            if(item.scene==this.localScene)
+            {
+              GridItem()
+              {
+                if(item.deviceType=='light')
+                {
+                  NormalLightCard({normalLightName:item.deviceName,scene:item.scene,idInRdb:item.id,isOpen:item.isOpen==1?true:false,lightBrightness:item.lightBrightness})
+                }
+                else if(item.deviceType=='thermometer')
+                {
+                  StandardThermometer({standardThermometerName:item.deviceName,scene:item.scene,idInRdb:item.id})
+                }
+              }
+            }else if(this.localScene=='全部')
             {
               GridItem()
               {
@@ -42,7 +61,7 @@ export struct HomeCard{
           })
         }.columnsTemplate('repeat(auto-stretch, 150)')
         .rowsGap(20)
-        .width('90%')
+        .width('100%')
         .height('100%')
         .margin({top:5})
         .scrollBar(BarState.Off)
@@ -51,20 +70,26 @@ export struct HomeCard{
         .edgeEffect(EdgeEffect.Spring,{ alwaysEnabled: true })
         .editMode(true)
         .onAppear(()=>{
-          setTimeout(()=>{GetDeviceInfoFromRdb();
-            this.myDeviceArray=deviceArray;},100)
+          GetDeviceInfoFromRdb();
+          GetSceneInfoFromRdb()
+          setTimeout(()=>{
+            this.deviceArray=deviceArray;
+          },100);           //100ms刷新
         })
 
-      }
+      }.height('100%')
+      .width('100%')
 
     }.onRefreshing(()=>{
       GetDeviceInfoFromRdb();
+      GetSceneInfoFromRdb();
       setTimeout(()=>{
-        this.myDeviceArray=deviceArray;
         this.cacheSHareDataData.isRefresh=false;
-      },700);           //700ms后刷新
+        this.deviceArray=deviceArray;
+      },150);           //100ms
 
-    })
+
+    }).height('100%')
 
 
   }
