@@ -18,6 +18,7 @@ export struct Home{
       .title('我的家')
       .titleMode(NavigationTitleMode.Free)
       .menus(HomeTopButtonBuilder())
+      .mode(NavigationMode.Stack)
 
 
   }

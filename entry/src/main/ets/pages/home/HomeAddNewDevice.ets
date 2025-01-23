@@ -6,7 +6,7 @@ import { storeRdb } from '../../entryability/EntryAbility'
 import { CacheSHareDataData } from '../../classes/AppStorageV2/CacheShareData';
 import { AppStorageV2, PersistenceV2 } from '@kit.ArkUI';
 import { PersistentShareData } from '../../classes/PersistenceV2/PersistentShareData';
-import { sceneArray, sceneArraySelect } from '../../tools/DoingToRdb';
+import { sceneArraySelect } from '../../tools/DoingToRdb';
 
 @ComponentV2
 export struct HomeAddNewDevice{

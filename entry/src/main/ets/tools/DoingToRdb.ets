@@ -12,7 +12,6 @@ let localSceneID:number=-1
 
 export let deviceArray:Array<DeviceClass>=[]
 export let sceneArraySelect:Array<SelectOption>=[]
-export let sceneArray:Array<string>=['全部']
 
 
 let persistentShareData:PersistentShareData=PersistenceV2.connect(PersistentShareData,()=>new PersistentShareData)!;
@@ -71,6 +70,8 @@ export  function GetSceneInfoFromRdb()
       while (resultSet.goToNextRow()) {
         const id=resultSet.getLong(resultSet.getColumnIndex('ID'));
         const sceneName=resultSet.getString(resultSet.getColumnIndex('SCENE'));
+
+        console.info(`${sceneName}`)
 
         if(localSceneID<id)
         {
@@ -154,4 +155,45 @@ export function  fixStandardThermometerDataFromRDB(device:StandardThermometerCla
       console.info(`Succeeded in updating data. row count: ${rows}`);
     })
   }
+}
+
+
+export function  deleteSceneFromRDB(Scene:string)
+{
+  let predicatesInScene = new relationalStore.RdbPredicates("SCENE_TABLE");
+  predicatesInScene.equalTo('SCENE',Scene);
+
+  let predicatesInDevice = new relationalStore.RdbPredicates("DEVICE_TABLE");
+  predicatesInDevice.equalTo('SCENE',Scene);
+
+  if (storeRdb !== undefined) {
+    (storeRdb as relationalStore.RdbStore).delete(predicatesInScene, (err: BusinessError, rows: number) => {
+      if (err) {
+        console.error(`Failed to delete data. Code:${err.code}, message:${err.message}`);
+        return;
+      }
+      console.info(`Delete rows: ${rows}`);
+      sceneArraySelect.splice(0,sceneArraySelect.length);
+      persistentShareData.sceneArray.splice(1,persistentShareData.sceneArray.length);
+      localSceneID=-1;
+      persistentShareData.localSceneID=-1;
+    })
+  }
+
+  if (storeRdb !== undefined) {
+
+    (storeRdb as relationalStore.RdbStore).delete(predicatesInDevice, (err: BusinessError, rows: number) => {
+      if (err) {
+        console.error(`Failed to delete data. Code:${err.code}, message:${err.message}`);
+        return;
+      }
+      console.info(`Delete rows: ${rows}`);
+      deviceArray.splice(0,deviceArray.length);
+      localID=-1;
+
+    })
+
+  }
+
+
 }
