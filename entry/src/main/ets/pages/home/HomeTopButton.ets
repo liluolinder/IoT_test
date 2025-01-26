@@ -25,7 +25,7 @@ export struct HomeTopButton {
 
   @Provider('isShowAddScene') isShowAddScene:boolean=false;
 
-  @Local isScanCode:boolean=false;
+  @Provider('isScanCode')  isScanCode:boolean=false;
 
   @Local index:number=1;
 
@@ -68,10 +68,18 @@ export struct HomeTopButton {
           try {scanBarcode.startScanForResult(getContext(this), { scanTypes: [scanCore.ScanType.ALL], enableMultiMode: true, enableAlbum: true }).then((result: scanBarcode.ScanResult) => {
             let obj:object= JSON.parse(JSON.stringify(result));
             this.codeResult=obj?.["originalValue"];
-            if(this.codeResult=='light'){
-              this.codeResult='灯';
-            }else{
-              this.codeResult='错误';
+            if(this.codeResult=='light'){}
+            else if(this.codeResult=='thermometer') {}
+            else{
+
+              AlertDialog.show({
+                title: '啊偶',
+                message: '您似乎扫描的不是有效设备二维码哦，亲',
+                isModal: true,
+                autoCancel: true,
+              })
+
+              return
             }
             this.isScanCode =true;
           }).catch((error: BusinessError) => {return});} catch (error) {}
@@ -84,17 +92,6 @@ export struct HomeTopButton {
   build() {
 
     Row(){
-      /*Select(HomeTitleSelectList)
-        .selected(0)
-        .value(HomeTitleSelectList==null?'暂未创建场景':HomeTitleSelectList[0].value)
-        .font({ size: 22, weight: FontWeight.Bolder })
-        .fontColor('#182431')
-        .selectedOptionFont({ size: 16, weight: 400 })
-        .optionFont({ size: 16, weight: 400 })
-        .menuAlign(MenuAlignType.START, {dx:0, dy:0})
-        .optionWidth(200)
-        .optionHeight(300)
-        .width('60%')*/
 
       Blank()
         .bindSheet($$this.isShowAddScene,this.HomeAddGroundBuildSheet(),
@@ -111,15 +108,14 @@ export struct HomeTopButton {
           {
             title:{title:'扫码结果',subtitle:'Result of code'},
             preferType:SheetType.BOTTOM,
-            height:300,
+
           })
 
 
       Button(){
-        SymbolGlyph($r('sys.symbol.plus')).fontSize('35')
-
+        SymbolGlyph($r('sys.symbol.plus')).fontSize('22')
       }.type(ButtonType.Circle)
-      .backgroundColor('#F1F3F5')
+      .backgroundColor('#0D000000')
       .bindMenu(this.TopAddMenu())
       .bindSheet($$this.isShowAddDevice,this.HomeAddDeviceBuildSheet(),
         {
@@ -127,13 +123,17 @@ export struct HomeTopButton {
           preferType:SheetType.BOTTOM,
         })
       .margin({right:10})
+      .height('38')
+      .width('38')
 
       Button(){
-       SymbolGlyph($r('sys.symbol.dot_grid_2x2')).fontSize('35')
+       SymbolGlyph($r('sys.symbol.dot_grid_2x2')).fontSize('22')
 
       }.type(ButtonType.Circle)
-      .backgroundColor('#F1F3F5')
+      .backgroundColor('#0D000000')
       .onClick(()=>{this.cacheSHareDataData.showHomeSideBar=true})
+      .height('38')
+      .width('38')
 
     }.alignItems(VerticalAlign.Bottom)
 

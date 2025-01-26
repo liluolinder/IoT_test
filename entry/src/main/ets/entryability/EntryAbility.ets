@@ -1,13 +1,47 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
-import { window } from '@kit.ArkUI';
+import { display, PersistenceV2, window } from '@kit.ArkUI';
 import { relationalStore } from '@kit.ArkData'; // 导入模块
 import { GetDeviceInfoFromRdb } from '../tools/DoingToRdb'
+import { PersistentShareData } from '../classes/PersistenceV2/PersistentShareData';
 
 
 export let storeRdb:relationalStore.RdbStore
 
 export default class EntryAbility extends UIAbility {
+
+  persistentShareData:PersistentShareData=PersistenceV2.connect(PersistentShareData,()=>new PersistentShareData)!;
+
+
+  private windowObj?: window.Window
+  private curBp: string = ''
+
+  private updateBreakpoint(windowWidth: number) :void{
+    // 拿到当前窗口对象获取当前所在displayId
+    let displayId = this.windowObj?.getWindowProperties().displayId
+
+    try {
+      // 将长度的单位由px换算为vp
+      let windowWidthVp = windowWidth / display.getDisplayByIdSync(displayId).densityPixels
+
+      let newBp: string = ''
+
+      if (windowWidthVp < 840) {
+        newBp = 'sm'
+      } else {
+        newBp = 'lg'
+      }
+
+      if (this.curBp !== newBp) {
+        this.curBp = newBp
+        // 使用状态变量记录当前断点值
+        this.persistentShareData.curBp=newBp;
+      }
+    } catch(err) {
+      console.log("getDisplayByIdSync failed err"+err.code)
+    }
+  }
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
@@ -30,6 +64,7 @@ export default class EntryAbility extends UIAbility {
       hilog.info(0x0000, 'testTag', 'Succeeded in loading the content.');
 
     });
+
 
 
     const STORE_CONFIG :relationalStore.StoreConfig= {
@@ -67,6 +102,16 @@ export default class EntryAbility extends UIAbility {
       }
 
     })
+
+    windowStage.getMainWindow().then((windowObj) => {
+      this.windowObj = windowObj
+      // 获取应用启动时的窗口尺寸
+      this.updateBreakpoint(windowObj.getWindowProperties().windowRect.width)
+      // 注册回调函数，监听窗口尺寸变化
+      windowObj.on('windowSizeChange', (windowSize)=>{
+        this.updateBreakpoint(windowSize.width)
+      })
+    });
 
   }
 

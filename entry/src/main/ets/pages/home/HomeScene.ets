@@ -19,7 +19,6 @@ export struct HomeScene{
   MoreSceneMenu()
   {
     Menu(){
-
       ForEach(this.persistentShareData.sceneArray,(scene:string,index:number)=>{
 
         MenuItem({content:scene})
@@ -33,6 +32,7 @@ export struct HomeScene{
             }
           })
           .backgroundColor(index === this.focusIndex ? '#0A59F7' : Color.White)
+          .contentFontColor(index===this.focusIndex?Color.White:Color.Black)
 
       })
 
