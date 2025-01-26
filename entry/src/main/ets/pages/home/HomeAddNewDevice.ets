@@ -55,7 +55,7 @@ export struct HomeAddNewDevice{
                 Column(){
                   Image(item.devicePic)
                     .height('70')
-                    .margin({top:10})
+                    .margin({top:30})
                   Blank()
                   Row(){
                     Text(item.deviceName)
