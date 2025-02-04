@@ -158,6 +158,7 @@ export struct HomeScene{
         .onAnimationStart((index: number, targetIndex: number) => {
           this.focusIndex = targetIndex;
           this.listScroller.scrollToIndex(targetIndex, true, ScrollAlign.CENTER);
+          this.cacheSHareDataData.isRefresh=true
         })
       }
       .height('100%')

@@ -11,6 +11,10 @@
     {
       "name": "EntryAbility_label",
       "value": "IOT_test"
+    },
+    {
+      "name": "share",
+      "value": "test1"
     }
   ]
 }

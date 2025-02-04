@@ -1,6 +1,7 @@
 import { DefaultHardVibration }from '../../../tools/Vibrator'
 import { AppStorageV2, CustomContentDialog } from '@kit.ArkUI'
-import { deleteDataFromRDB, fixNormalLightDataFromRDB } from '../../../tools/DoingToRdb';
+import { deleteDataFromRDB, fixNormalLightDataFromRDB, GetDeviceInfoFromRdb,
+  GetSceneInfoFromRdb } from '../../../tools/DoingToRdb';
 import { NormalLightClass } from '../../../classes/NormalLightClass';
 import { CacheSHareDataData } from '../../../classes/AppStorageV2/CacheShareData';
 
@@ -24,6 +25,34 @@ export struct NormalLightCard{
   @Param @Once normalLightOff:Resource=$r('app.media.normalLightOff');
   @Param @Once normalLightOn:Resource=$r('app.media.normalLightOn');
 
+  @Monitor('isOpen')
+  onLightOpenChange()
+  {
+    if(this.isOpen&&this.lightBrightness!=1)
+    {
+      this.lightBrightness=1;
+    }else{
+      this.lightBrightness=0;
+    }
+  }
+
+  @Monitor('lightBrightness')
+  onLightBrightnessChange()
+  {
+    if(this.lightBrightness==0)
+    {
+      this.isOpen=false
+    }else{
+      this.isOpen=true
+    }
+    let changeNormalLight:NormalLightClass=new NormalLightClass(this.idInRdb,this.normalLightName,this.scene,this.isOpen?1:0,this.lightBrightness)
+    fixNormalLightDataFromRDB(changeNormalLight)
+
+
+  }
+
+
+
   @Builder
   NormalLightCardPreview(){
 
@@ -42,8 +71,8 @@ export struct NormalLightCard{
             .style({strokeWidth:16,scaleCount:5,enableScanEffect:true,enableSmoothEffect:true})
             .height('130')
 
-          Text('灯光亮度')
-        }.visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
+          Text(this.isOpen?'灯光亮度':"未开启")
+        }
 
       }.width('90%')
 
@@ -67,20 +96,17 @@ export struct NormalLightCard{
         .margin({top:10,bottom:20})
         .onChange(()=> {
           DefaultHardVibration();
-          let changeNormalLight:NormalLightClass=new NormalLightClass(this.idInRdb,this.normalLightName,this.scene,this.isOpen?1:0,this.lightBrightness)
-          fixNormalLightDataFromRDB(changeNormalLight);
         })
 
-        Text('灯光亮度:').width('95%').textAlign(TextAlign.Start).visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
+        Text('灯光亮度:').width('95%').textAlign(TextAlign.Start)
 
-        Slider({value:$$this.lightBrightness,min:1,max:5,step:1,style:SliderStyle.InSet})
+        Slider({value:$$this.lightBrightness,min:0,max:5,step:1,style:SliderStyle.InSet})
           .showSteps(true)
           .showTips(true,this.lightBrightness.toString())
-          .visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)
+          /*.visibility(this.isOpen?Visibility.Visible:Visibility.Hidden)*/
           .onChange(()=>{
             DefaultHardVibration();
-            let changeNormalLight:NormalLightClass=new NormalLightClass(this.idInRdb,this.normalLightName,this.scene,this.isOpen?1:0,this.lightBrightness)
-            fixNormalLightDataFromRDB(changeNormalLight);
+
           })
 
       }.backgroundColor(Color.White)
@@ -171,11 +197,7 @@ export struct NormalLightCard{
 //https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/ts-basic-components-datapanel-V13#colorstop10
 
         Toggle({type:ToggleType.Switch,isOn:$$this.isOpen})
-          .onChange(()=>
-          {
-            let changeNormalLight:NormalLightClass=new NormalLightClass(this.idInRdb,this.normalLightName,this.scene,this.isOpen?1:0,this.lightBrightness)
-            fixNormalLightDataFromRDB(changeNormalLight);
-          })
+
 
       }.width('90%')
       .height('180')

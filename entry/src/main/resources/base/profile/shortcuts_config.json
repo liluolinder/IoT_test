@@ -1,0 +1,15 @@
+{
+  "shortcuts": [
+    {
+      "shortcutId": "id_test1",
+      "label": "$string:share",
+      "wants": [
+        {
+          "bundleName": "com.test.iot",
+          "moduleName": "entry",
+          "abilityName": "EntryAbility"
+        }
+      ]
+    }
+  ]
+}

@@ -7,7 +7,7 @@ import { StandardThermometerClass } from '../classes/StandardThermometerClass';
 import { PersistentShareData } from '../classes/PersistenceV2/PersistentShareData';
 import { PersistenceV2 } from '@kit.ArkUI';
 
-let localID:number=-1
+export let localID:number=-1
 let localSceneID:number=-1
 
 export let deviceArray:Array<DeviceClass>=[]
@@ -104,11 +104,15 @@ export function  deleteDataFromRDB(idInRdb:number)
       }
       console.info(`Delete rows: ${rows}`);
 
-      deviceArray.splice(0,deviceArray.length);
-
-      localID=-1;
     })
   }
+}
+
+export function  refreshDataFromRDB() {
+  deviceArray.splice(0,deviceArray.length);
+  localID = -1;
+  GetDeviceInfoFromRdb()
+  GetSceneInfoFromRdb()
 }
 
 export function  fixNormalLightDataFromRDB(device:NormalLightClass)

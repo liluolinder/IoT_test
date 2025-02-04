@@ -1,6 +1,5 @@
-import { HomeCard } from './HomeCard'
+
 import { HomeScene } from './HomeScene'
-import { HomeSceneTab } from './HomeSceneTab'
 import { HomeTopButtonBuilder } from './HomeTopButton'
 
 

@@ -2,12 +2,10 @@ import { NormalLightCard } from '../../components/cards/lights/NormalLightCard'
 import { StandardThermometer } from '../../components/cards/thermometers/StandardThermometer'
 
 import  { DeviceClass } from '../../classes/DeviceClass'
-import { deviceArray, GetDeviceInfoFromRdb, GetSceneInfoFromRdb} from '../../tools/DoingToRdb'
+import { deviceArray, GetDeviceInfoFromRdb, GetSceneInfoFromRdb, refreshDataFromRDB} from '../../tools/DoingToRdb'
 import { AppStorageV2, PersistenceV2 } from '@kit.ArkUI';
 import { CacheSHareDataData } from '../../classes/AppStorageV2/CacheShareData';
 import { PersistentShareData } from '../../classes/PersistenceV2/PersistentShareData';
-import { HomeTopButtonBuilder } from './HomeTopButton';
-import { HomeScene } from './HomeScene';
 
 @ComponentV2
 export struct HomeCard{
@@ -81,8 +79,7 @@ export struct HomeCard{
       .width('100%')
 
     }.onRefreshing(()=>{
-      GetDeviceInfoFromRdb();
-      GetSceneInfoFromRdb();
+      refreshDataFromRDB()
       setTimeout(()=>{
         this.cacheSHareDataData.isRefresh=false;
         this.deviceArray=deviceArray;
