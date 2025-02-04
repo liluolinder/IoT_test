@@ -109,10 +109,10 @@ export struct HomeCard {
             }
           });
         }
-        .columnsTemplate('repeat(auto-stretch, 150)') // 定义网格列模板
+        .columnsTemplate('repeat(auto-fit, 150)') // 定义网格列模板
         .rowsGap(20) // 定义网格行间距
         .width('100%') // 设置网格宽度为父容器的 100%
-        .height('100%') // 设置网格高度为父容器的 100%
+        .height('90%') // 设置网格高度为父容器的 100%
         .margin({ top: 5 }) // 设置网格顶部外边距为 5
         .scrollBar(BarState.Off) // 隐藏网格滚动条
         .multiSelectable(true) // 允许网格项多选
